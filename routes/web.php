@@ -1,6 +1,7 @@
 
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Foundation\Application;
@@ -12,6 +13,7 @@ use Inertia\Inertia;
 Route::redirect('/', '/sign-in');
 
 Route::resource('rooms', RoomController::class);
+Route::resource('departments', DepartmentController::class);
 
 Route::get('file-upload-to-s3', function () {
     return view('file.upload');
@@ -32,7 +34,7 @@ Route::post('uploading', function (Request $request) {
 })->name('uploading');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

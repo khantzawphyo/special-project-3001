@@ -2,6 +2,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -10,9 +11,7 @@ use Inertia\Inertia;
 
 Route::redirect('/', '/sign-in');
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Welcome');
-// });
+Route::resource('rooms', RoomController::class);
 
 Route::get('file-upload-to-s3', function () {
     return view('file.upload');

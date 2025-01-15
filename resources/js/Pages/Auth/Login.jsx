@@ -1,4 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react';
+import mainBg from '/public/assets/academic-bg.jpg';
 import bgImage from '/public/assets/bg.jpg';
 
 export default function Login({ status, canResetPassword }) {
@@ -30,9 +31,9 @@ export default function Login({ status, canResetPassword }) {
             <Head title="Sign In" />
             <div className="hidden min-h-screen lg:block">
                 <img
-                    src="https://images.unsplash.com/photo-1566811850669-887f44a89c68?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bXlhbm1hciUyMHVuaXZlcnNpdHl8ZW58MHx8MHx8fDA%3D"
+                    src={mainBg}
                     alt=""
-                    className="h-screen w-full object-fill"
+                    className="h-full w-full rounded-r-3xl object-fill"
                 />
             </div>
             <div className="mx-auto min-h-screen pt-48 lg:w-auto 2xl:w-full 2xl:px-20 2xl:pe-80">

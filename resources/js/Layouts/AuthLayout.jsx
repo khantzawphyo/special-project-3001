@@ -2,7 +2,7 @@ import SideBar from '@/Components/SideBar';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Welcome() {
+export default function AuthLayout({ children }) {
     return (
         <div className="bg-gray-50 antialiased dark:bg-gray-900">
             <Head title="Dashboard" />
@@ -718,27 +718,7 @@ export default function Welcome() {
 
             <SideBar />
 
-            <MainLayout>
-                <div className="mb-4 grid grid-cols-2 gap-4 rounded-3xl border-2 border-purple-300 p-2 dark:border-purple-600">
-                    <div className="h-56 w-auto rounded-3xl border-2 border-red-500"></div>
-                    <div className="h-56 w-auto rounded-3xl border-2 border-red-500"></div>
-                </div>
-
-                <div className="mb-4 grid grid-cols-6 gap-4 rounded-3xl border-2 border-purple-300 p-2 dark:border-purple-600">
-                    <div className="col-span-4 h-56 rounded-3xl border-2 border-red-500 p-2 dark:border-red-500">
-                        <div className="grid h-full grid-cols-3 gap-2">
-                            <div className="h-full rounded-3xl border-2 border-red-500 dark:border-red-500" />
-                            <div className="h-full rounded-3xl border-2 border-red-500 dark:border-red-500" />
-                            <div className="h-full rounded-3xl border-2 border-red-500 dark:border-red-500" />
-                        </div>
-                    </div>
-                    <div className="col-span-2 h-56 rounded-3xl border-2 border-red-500 dark:border-red-500"></div>
-                </div>
-
-                <div className="mb-4 grid grid-cols-6 gap-4 rounded-3xl border-2 border-purple-300 p-2 dark:border-purple-600">
-                    <div className="col-span-4 h-56 rounded-3xl border-2 border-red-500 dark:border-red-500" />
-                </div>
-            </MainLayout>
+            <MainLayout>{children}</MainLayout>
         </div>
     );
 }

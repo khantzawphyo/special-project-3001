@@ -39,14 +39,24 @@ export default function SideBar() {
 
                 <ul className="space-y-2">
                     <SideBarLink
+                        routeLink={route('dashboard')}
+                        icon=""
+                        routeName="Dashboard"
+                    />
+                    <SideBarLink
                         routeLink={route('rooms.index')}
                         icon=""
                         routeName="Rooms"
                     />
                     <SideBarLink
-                        routeLink={route('rooms.index')}
+                        routeLink={route('departments.index')}
                         icon=""
-                        routeName="Faculties"
+                        routeName="Departments"
+                    />
+                    <SideBarLink
+                        routeLink={route('departments.index')}
+                        icon=""
+                        routeName="Students"
                     />
                 </ul>
             </div>

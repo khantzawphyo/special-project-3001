@@ -1,7 +1,7 @@
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
-export default function Index({ faculties }) {
+export default function Index({ courses }) {
     return (
         <>
             <AuthLayout>

@@ -19,6 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('departments', DepartmentController::class);
     Route::resource('faculties', FacultyController::class);
     Route::resource('courses', CourseController::class);
+    Route::get('add-new-timetable', function () {
+        // return Inertia::render('AddTimetable');
+    })->name('timetable.add');
 });
 
 Route::get('file-upload-to-s3', function () {

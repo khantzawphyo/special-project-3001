@@ -1,13 +1,13 @@
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
-export default function Index({ departments }) {
+export default function Index({ faculties }) {
     return (
         <>
             <AuthLayout>
-                <Head title="Departments" />
+                <Head title="Courses" />
                 <Link
-                    href={route('departments.create')}
+                    href={route('faculties.create')}
                     className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
                 >
                     Create
@@ -20,7 +20,10 @@ export default function Index({ departments }) {
                                     Name
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Department Code
+                                    Role
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Department
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Action
@@ -28,22 +31,25 @@ export default function Index({ departments }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {departments.map((department) => (
+                            {faculties.map((faculty) => (
                                 <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                                     <td
                                         scope="row"
                                         className="px-6 py-4 dark:text-white"
                                     >
-                                        {department.name}
+                                        {faculty.name}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {department.dept_code}
+                                        {faculty.role.title}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {faculty.department.name}
                                     </td>
                                     <td className="flex gap-x-2 px-6 py-4">
                                         <Link
                                             href={route(
-                                                'departments.edit',
-                                                department,
+                                                'faculties.edit',
+                                                faculty,
                                             )}
                                             className="font-medium text-yellow-600 hover:underline dark:text-yellow-500"
                                         >
@@ -54,7 +60,7 @@ export default function Index({ departments }) {
                                                 e.preventDefault();
                                                 router.delete(
                                                     route(
-                                                        'departments.destroy',
+                                                        'faculties.destroy',
                                                         department,
                                                     ),
                                                 );

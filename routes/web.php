@@ -1,7 +1,9 @@
 
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Foundation\Application;
@@ -12,8 +14,12 @@ use Inertia\Inertia;
 
 Route::redirect('/', '/sign-in');
 
-Route::resource('rooms', RoomController::class);
-Route::resource('departments', DepartmentController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('rooms', RoomController::class);
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('faculties', FacultyController::class);
+    Route::resource('courses', CourseController::class);
+});
 
 Route::get('file-upload-to-s3', function () {
     return view('file.upload');

@@ -54,9 +54,14 @@ export default function SideBar() {
                         routeName="Departments"
                     />
                     <SideBarLink
-                        routeLink={route('departments.index')}
+                        routeLink={route('faculties.index')}
                         icon=""
-                        routeName="Students"
+                        routeName="Faculties"
+                    />
+                    <SideBarLink
+                        routeLink={route('courses.index')}
+                        icon=""
+                        routeName="Courses"
                     />
                 </ul>
             </div>

@@ -22,6 +22,7 @@ By using **CSP solutions**, this project aims to efficiently and effectively dev
 
 ## Additional Tools
 
+- **Docker:** A platform for developing, shipping, and running applications in lightweight, portable containers, ensuring consistency across development, testing, and production environments.
 - **Figma:** A web-based design tool used for UI/UX design and prototyping, enabling collaboration among designers and stakeholders.
 - **MySQL:** An open-source relational database management system used for storing and managing application data.
 - **phpMyAdmin:** A free and open-source administration tool for MySQL, providing a web interface to manage MySQL databases.
@@ -34,7 +35,7 @@ By using **CSP solutions**, this project aims to efficiently and effectively dev
 
 1. Clone the repository:
      ```bash
-     git clone https://github.com/yourusername/special-project-3001.git
+     git clone https://github.com/mryeminaung/special-project-3001.git
      cd special-project-3001
      ```
 
@@ -44,7 +45,13 @@ By using **CSP solutions**, this project aims to efficiently and effectively dev
      npm install
      ```
 
-3. Configure your database settings in the `.env` file:
+3. Set up environment variables:
+     ```bash
+     cp .env.example .env
+     php artisan key:generate
+     ```
+
+4. Configure your database settings in the `.env` file:
     ```env
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -53,11 +60,6 @@ By using **CSP solutions**, this project aims to efficiently and effectively dev
     DB_USERNAME=your_database_username
     DB_PASSWORD=your_database_password
     ```
-4. Set up environment variables:
-     ```bash
-     cp .env.example .env
-     php artisan key:generate
-     ```
 
 5. Run migrations:
      ```bash

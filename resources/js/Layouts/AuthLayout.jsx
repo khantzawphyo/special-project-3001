@@ -4,7 +4,7 @@ import { Head } from '@inertiajs/react';
 
 export default function AuthLayout({ children }) {
     return (
-        <div className="bg-gray-50 antialiased dark:bg-gray-900">
+        <div className="bg-[#F4F4F5] antialiased">
             <Head title="Dashboard" />
             <nav className="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-white px-4 py-2.5 pe-12 dark:border-gray-700 dark:bg-gray-800">
                 <div className="flex flex-wrap items-center justify-between">
@@ -124,8 +124,8 @@ export default function AuthLayout({ children }) {
                                     src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
                                     alt="John Doe"
                                 />
-                                <div>
-                                    <p>John Doe</p>
+                                <div className="flex flex-col items-start">
+                                    <p>Daw Win Aye</p>
                                     <span className="text-gray-400">
                                         Professor
                                     </span>
@@ -158,10 +158,10 @@ export default function AuthLayout({ children }) {
                         >
                             <div className="px-4 py-3">
                                 <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-                                    Neil Sims
+                                    Daw Win Aye
                                 </span>
                                 <span className="block truncate text-sm text-gray-900 dark:text-white">
-                                    name@flowbite.com
+                                    win_aye@miit.edu.mm
                                 </span>
                             </div>
                             <ul
@@ -189,42 +189,6 @@ export default function AuthLayout({ children }) {
                                 className="py-1 text-gray-700 dark:text-gray-300"
                                 aria-labelledby="dropdown"
                             >
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    >
-                                        <svg
-                                            className="mr-2 h-5 w-5 text-gray-400"
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                fillRule="evenodd"
-                                                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                                                clipRule="evenodd"
-                                            />
-                                        </svg>
-                                        My likes
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    >
-                                        <svg
-                                            className="mr-2 h-5 w-5 text-gray-400"
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
-                                        </svg>
-                                        Collections
-                                    </a>
-                                </li>
                                 <li>
                                     <a
                                         href="#"

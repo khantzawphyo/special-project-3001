@@ -6,6 +6,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
+use App\Models\Faculty;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -43,7 +44,8 @@ Route::post('uploading', function (Request $request) {
 })->name('uploading');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $faculties = Faculty::paginate(6);
+    return Inertia::render('Dashboard', ['faculties' => $faculties]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

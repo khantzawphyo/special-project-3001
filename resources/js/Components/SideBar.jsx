@@ -39,10 +39,10 @@ export default function SideBar() {
                 </form>
 
                 <ul className="space-y-1 px-4 py-8 pt-10 text-center text-white">
-                    <li className="mb-16">
+                    <li className="mb-14">
                         <Link
                             href={route('timetable.add')}
-                            className="mb-2 me-2 inline-flex w-[170px] items-center rounded-full bg-white px-5 py-1 text-center text-sm font-medium text-[#925FE2] hover:text-[#925FE2] focus:outline-none"
+                            className="mb-2 me-2 inline-flex w-[170px] items-center rounded-full bg-white px-3 py-1 text-center text-sm font-medium text-[#925FE2] hover:text-[#925FE2] focus:outline-none"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -204,6 +204,7 @@ export default function SideBar() {
                         }
                         routeName="Faculties"
                     />
+
                     <SideBarLink
                         routeLink={route('rooms.index')}
                         icon={
@@ -231,6 +232,7 @@ export default function SideBar() {
                         }
                         routeName="Rooms"
                     />
+
                     <SideBarLink
                         routeLink={route('departments.index')}
                         icon={

@@ -6,18 +6,18 @@ export default function AuthLayout({ children }) {
     return (
         <div className="bg-[#F4F4F5] antialiased">
             <Head title="Dashboard" />
-            <nav className="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-white px-4 py-2.5 pe-12 dark:border-gray-700 dark:bg-gray-800">
+            <nav className="fixed left-0 right-0 top-0 z-50 bg-[#F4F4F5] px-4 py-2.5 pe-12 dark:border-gray-700 dark:bg-gray-800">
                 <div className="flex flex-wrap items-center justify-between">
-                    <div className="flex h-12 items-center justify-between">
+                    <div className="flex items-center justify-between">
                         <button
                             data-drawer-target="drawer-navigation"
                             data-drawer-toggle="drawer-navigation"
                             aria-controls="drawer-navigation"
-                            className="mr-2 cursor-pointer rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 md:hidden"
+                            className="text-purple-[#3D2E58] order-1 mr-2 block cursor-pointer rounded-lg p-2 md:order-2"
                         >
                             <svg
                                 aria-hidden="true"
-                                className="h-6 w-6"
+                                className="h-10 w-10"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -45,46 +45,14 @@ export default function AuthLayout({ children }) {
                         </button>
                         <a
                             href="https://miit.edu.mm"
-                            className="mr-4 flex items-center justify-between"
+                            className="order-2 mr-4 flex items-center justify-between md:order-1"
                         >
                             <img
                                 src="https://lms.miit.edu.mm/pluginfile.php/1/core_admin/logo/0x200/1684573304/miit_logo_wordmark_small.png"
-                                className="mr-3 h-14"
+                                className="mr-3 h-14 md:mx-10"
                                 alt="MIIT"
                             />
                         </a>
-                        <form
-                            action="#"
-                            method="GET"
-                            className="hidden md:block md:pl-2"
-                        >
-                            <label htmlFor="topbar-search" className="sr-only">
-                                Search
-                            </label>
-                            <div className="relative md:w-96">
-                                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <svg
-                                        className="h-5 w-5 text-gray-500 dark:text-gray-400"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            clipRule="evenodd"
-                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                        />
-                                    </svg>
-                                </div>
-                                <input
-                                    type="text"
-                                    name="email"
-                                    id="topbar-search"
-                                    className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                                    placeholder="Search"
-                                />
-                            </div>
-                        </form>
                     </div>
 
                     <div className="flex items-center lg:order-2">

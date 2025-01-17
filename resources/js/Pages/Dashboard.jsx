@@ -2,25 +2,39 @@ import OverviewCard from '@/Components/OverviewCard';
 import OverviewFaculty from '@/Components/OverviewFaculty';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link } from '@inertiajs/react';
+import StudentImg from '/public/assets/student.png';
 
 export default function Dashboard({ faculties }) {
     return (
         <>
             <AuthLayout>
                 <Head title="Dashboard" />
-                <div className="mb-4 rounded-3xl bg-white p-2">
-                    <div className="grid grid-cols-6">
-                        <div className="col-span-4 h-56 w-auto rounded-3xl bg-gray-100"></div>
-                        <div className="col-span-2 h-56 w-auto rounded-3xl bg-gray-100"></div>
+                <div className="grid grid-cols-1 items-center rounded-3xl bg-gradient-to-l from-[#6D5394] to-[#3B2C55] p-8 pt-10 text-white lg:grid-cols-3 lg:pe-10 lg:ps-16">
+                    <div className="col-span-2 space-y-12">
+                        <p className="font-semibold">January 24, 2025</p>
+                        <div className="space-y-2">
+                            <h2 className="text-3xl font-semibold lg:text-4xl">
+                                Welcome Back, Daw Win Aye!
+                            </h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Sed, cupiditate.
+                            </p>
+                        </div>
                     </div>
+                    <img
+                        className="hidden xl:col-span-1 xl:block"
+                        src={StudentImg}
+                        alt="student image"
+                    />
                 </div>
 
-                <div className="mb-4 grid grid-cols-12 gap-x-16 rounded-3xl">
-                    <div className="col-span-8 rounded-3xl">
+                <div className="mb-4 grid grid-cols-1 gap-x-16 rounded-3xl xl:grid-cols-12">
+                    <div className="mb-12 rounded-3xl lg:col-span-8 xl:mb-0">
                         <h2 className="mb-4 text-xl font-bold">Overview</h2>
-                        <div className="grid grid-cols-3 gap-x-10">
+                        <div className="grid grid-cols-3 gap-x-3 xl:gap-x-10">
                             <OverviewCard
-                                count={100}
+                                count={96}
                                 icon={
                                     <svg
                                         className="mx-auto"
@@ -61,31 +75,30 @@ export default function Dashboard({ faculties }) {
                                 count={400}
                                 icon={
                                     <svg
-                                        className="mx-auto"
-                                        width={90}
-                                        height={80}
-                                        viewBox="0 0 92 88"
+                                        width="90"
+                                        height="80"
+                                        viewBox="0 0 94 78"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
                                         <path
                                             fillRule="evenodd"
                                             clipRule="evenodd"
-                                            d="M82.2672 56.4944H47.738C55.5771 55.8858 61.7342 49.8043 61.7342 42.3917C61.7342 34.5753 54.8879 28.2388 46.4426 28.2388H35.1606C37.7342 25.0349 39.257 21.0649 39.257 16.7657C39.257 10.0627 35.5552 4.15986 29.9404 0.713013H82.2672C87.2694 0.713013 91.3234 4.46575 91.3234 9.09497V48.1125C91.3234 52.7417 87.2694 56.4944 82.2672 56.4944ZM18.4593 28.2468C25.3103 28.2468 30.8642 23.1066 30.8642 16.7657C30.8642 10.4249 25.3103 5.2846 18.4593 5.2846C11.6083 5.2846 6.05443 10.4249 6.05443 16.7657C6.05443 23.1066 11.6083 28.2468 18.4593 28.2468ZM53.3413 42.3917C53.3413 38.8654 50.2526 36.0067 46.4426 36.0067H18.4618C8.63903 36.0067 0.676117 43.3766 0.676117 52.4679V59.9595C0.676117 63.2666 3.57283 65.9475 7.14611 65.9475H8.29855L10.1918 82.1661C10.5602 85.3218 13.4383 87.713 16.8673 87.713H20.2397C23.5903 87.713 26.428 85.4268 26.8899 82.3557L31.9395 48.7767H46.4426C50.2526 48.7767 53.3413 45.918 53.3413 42.3917Z"
-                                            fill="url(#paint0_linear_327_931)"
+                                            d="M53.7143 18.9645C53.7143 29.2606 44.696 37.6073 33.5714 37.6073C22.4469 37.6073 13.4286 29.2606 13.4286 18.9645C13.4286 8.66833 22.4469 0.321609 33.5714 0.321609C44.696 0.321609 53.7143 8.66833 53.7143 18.9645ZM33.5714 43.8214C15.0305 43.8214 0 57.7327 0 74.8929C0 76.6086 1.50305 78 3.35714 78H63.7857C65.6398 78 67.1429 76.6086 67.1429 74.8929C67.1429 57.7327 52.1124 43.8214 33.5714 43.8214ZM90.6435 78H75.0496C75.3665 77.0157 75.5364 75.9723 75.5364 74.8929C75.5364 62.2089 68.9671 50.9453 58.8059 43.8571C59.3437 43.8334 59.8849 43.8214 60.4291 43.8214C78.9701 43.8214 94.0007 57.7327 94.0007 74.8929C94.0007 76.6086 92.4973 78 90.6435 78ZM60.4291 37.6073C58.4032 37.6073 56.4472 37.3305 54.6028 36.8155C59.2631 32.1148 62.1077 25.8471 62.1077 18.9645C62.1077 12.0818 59.2631 5.81411 54.6027 1.11337C56.4472 0.598393 58.4032 0.321609 60.4291 0.321609C71.5535 0.321609 80.5721 8.66833 80.5721 18.9645C80.5721 29.2606 71.5535 37.6073 60.4291 37.6073Z"
+                                            fill="url(#paint0_linear_327_156)"
                                         />
                                         <defs>
                                             <linearGradient
-                                                id="paint0_linear_327_931"
-                                                x1="45.9998"
-                                                y1="0.713013"
-                                                x2="45.9998"
-                                                y2="87.713"
+                                                id="paint0_linear_327_156"
+                                                x1="47.0003"
+                                                y1="0.321609"
+                                                x2="47.0003"
+                                                y2="78"
                                                 gradientUnits="userSpaceOnUse"
                                             >
                                                 <stop stopColor="#3B2C55" />
                                                 <stop
-                                                    offset={1}
+                                                    offset="1"
                                                     stopColor="#6949A0"
                                                 />
                                             </linearGradient>
@@ -99,8 +112,8 @@ export default function Dashboard({ faculties }) {
                                 count={100}
                                 icon={
                                     <svg
-                                        width={94}
-                                        height={87}
+                                        width={90}
+                                        height={80}
                                         viewBox="0 0 94 87"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -142,8 +155,8 @@ export default function Dashboard({ faculties }) {
                             />
                         </div>
                     </div>
-                    <div className="col-span-4 h-56 rounded-3xl">
-                        <div className="mb-4 flex justify-between font-semibold">
+                    <div className="mb-4 rounded-3xl lg:col-span-4 xl:mb-0">
+                        <div className="mb-3 flex justify-between font-semibold">
                             <p className="text-xl font-bold">Faculty</p>
                             <Link
                                 href={route('faculties.index')}
@@ -152,17 +165,23 @@ export default function Dashboard({ faculties }) {
                                 See all
                             </Link>
                         </div>
-                        <div className="flex flex-wrap gap-6">
+                        <div className="flex flex-wrap gap-4 lg:gap-6">
                             {faculties.data.map((faculty) => (
-                                <OverviewFaculty />
+                                <OverviewFaculty key={faculty.id} />
                             ))}
                         </div>
                     </div>
                 </div>
 
-                <div className="mb-4 grid grid-cols-6 gap-4 rounded-3xl">
-                    <div className="col-span-4 h-56 rounded-3xl">
-                        <p className="text-xl font-bold">Exam Time tables</p>
+                <div className="mb-4 grid grid-cols-6 gap-8 rounded-3xl">
+                    <div className="col-span-4 h-48 rounded-3xl">
+                        <p className="mb-2 text-xl font-bold">
+                            Exam TimeTables
+                        </p>
+                        <div className="grid h-32 grid-cols-10 gap-x-3 lg:h-48 lg:gap-x-10">
+                            <div className="col-span-5 h-full rounded-3xl border-4 border-purple-600/80"></div>
+                            <div className="col-span-5 h-full rounded-3xl border-4 border-purple-600/80"></div>
+                        </div>
                     </div>
                 </div>
             </AuthLayout>

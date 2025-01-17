@@ -1,9 +1,9 @@
-
 # Scheduling Exam Timetable using CSP Solutions
 
 ## Overview
 
 The project aims to create an exam schedule using Constraint Satisfaction Problem (CSP) solutions that accommodates the needs of all stakeholders. This schedule will address constraints such as:
+
 - Allowing invigilators teaching a subject to be exempt from waiting for the exam room except the requested.
 - Ensuring that each invigilator spends time in the exam room at least once a day as soon as possible.
 - Guaranteeing that each student can only take one exam per day.
@@ -13,6 +13,7 @@ By using **CSP solutions**, this project aims to efficiently and effectively dev
 ## Tech Stack
 
 - **Frontend:**
+
     - **React:** A JavaScript library for building user interfaces, allowing for the creation of reusable UI components.
     - **Tailwind CSS:** A utility-first CSS framework for rapidly building custom designs without leaving your HTML.
 
@@ -30,28 +31,31 @@ By using **CSP solutions**, this project aims to efficiently and effectively dev
 - **GitHub:** A web-based platform for version control and collaboration, allowing multiple developers to work on projects simultaneously.
 - **Visual Studio Code (VS Code):** A source-code editor made by Microsoft for Windows, Linux, and macOS, featuring support for debugging, syntax highlighting, intelligent code completion, snippets, and code refactoring.
 
-
 ## Installation
 
 1. Clone the repository:
-     ```bash
-     git clone https://github.com/mryeminaung/special-project-3001.git
-     cd special-project-3001
-     ```
+
+    ```bash
+    git clone https://github.com/mryeminaung/special-project-3001.git
+    cd special-project-3001
+    ```
 
 2. Install dependencies:
-     ```bash
-     composer install
-     npm install
-     ```
+
+    ```bash
+    composer install
+    npm install
+    ```
 
 3. Set up environment variables:
-     ```bash
-     cp .env.example .env
-     php artisan key:generate
-     ```
+
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
 
 4. Configure your database settings in the `.env` file:
+
     ```env
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -62,14 +66,21 @@ By using **CSP solutions**, this project aims to efficiently and effectively dev
     ```
 
 5. Run migrations:
-     ```bash
-     php artisan migrate
-     ```
 
-6. Start the development server:
-     ```bash
-     composer run dev
-     ```
+    ```bash
+    php artisan migrate
+    ```
+
+6. Seeding database(optional)
+
+    ```bash
+    php artisan db:seed
+    ```
+
+7. Start the development server:
+    ```bash
+    composer run dev
+    ```
 
 ## Usage
 

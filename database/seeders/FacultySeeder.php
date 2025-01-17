@@ -59,7 +59,7 @@ class FacultySeeder extends Seeder
      */
     private function generateEmail(string $faculty, string $name)
     {
-        $username = strtolower(implode('-', array_slice(explode(' ', $name), 1)));
+        $username = strtolower(implode('_', array_slice(explode(' ', $name), 1)));
         $email = "{$username}@miit.edu.mm";
         return $email;
     }

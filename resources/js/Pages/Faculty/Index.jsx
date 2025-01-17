@@ -1,3 +1,4 @@
+import FacultyDeptCard from '@/Components/FacultyDeptCard';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
@@ -10,9 +11,29 @@ export default function Index({ faculties }) {
         <>
             <AuthLayout>
                 <Head title="All Faculties" />
-                <h2 className="text-2xl font-semibold">
-                    Faculty & Departments
-                </h2>
+                <div className="mb-5">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-2xl font-semibold">
+                            Total Faculties
+                            <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
+                                100
+                            </span>
+                        </h2>
+                        <Link
+                            href={route('faculties.index')}
+                            className="text-lg font-semibold text-[#925FE2]"
+                        >
+                            See all
+                        </Link>
+                    </div>
+                    <div className="mt-5 grid grid-cols-4 justify-between gap-x-8">
+                        <FacultyDeptCard name="Computer Science" count={10} />
+                        <FacultyDeptCard name="Computing" count={3} />
+                        <FacultyDeptCard name="Information Science" count={6} />
+                        <FacultyDeptCard name="Technology Science" count={5} />
+                    </div>
+                </div>
+
                 <Link
                     href={route('faculties.create')}
                     className="hidden w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"

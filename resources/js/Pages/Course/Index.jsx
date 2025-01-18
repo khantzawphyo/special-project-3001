@@ -2,12 +2,16 @@ import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
 export default function Index({ courses }) {
+    console.log(courses);
+
+    // return null;
+
     return (
         <>
             <AuthLayout>
                 <Head title="Courses" />
                 <Link
-                    href={route('faculties.create')}
+                    href={route('courses.create')}
                     className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
                 >
                     Create
@@ -20,10 +24,13 @@ export default function Index({ courses }) {
                                     Name
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Role
+                                    Course Code
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Department
+                                    Credit
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Program
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Action
@@ -31,26 +38,29 @@ export default function Index({ courses }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {faculties.map((faculty) => (
-                                <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+                            {courses.map((course) => (
+                                <tr
+                                    key={course.id}
+                                    className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
+                                >
                                     <td
                                         scope="row"
                                         className="px-6 py-4 dark:text-white"
                                     >
-                                        {faculty.name}
+                                        {course.title}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {faculty.role.title}
+                                        {course.course_code}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {faculty.department.name}
+                                        {course.credit}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {course.program.name}
                                     </td>
                                     <td className="flex gap-x-2 px-6 py-4">
                                         <Link
-                                            href={route(
-                                                'faculties.edit',
-                                                faculty,
-                                            )}
+                                            href={route('courses.edit', course)}
                                             className="font-medium text-yellow-600 hover:underline dark:text-yellow-500"
                                         >
                                             Edit
@@ -60,8 +70,8 @@ export default function Index({ courses }) {
                                                 e.preventDefault();
                                                 router.delete(
                                                     route(
-                                                        'faculties.destroy',
-                                                        department,
+                                                        'courses.destroy',
+                                                        course,
                                                     ),
                                                 );
                                             }}

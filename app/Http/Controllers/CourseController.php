@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Program;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CourseController extends Controller
 {
@@ -12,7 +14,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::with(['program'])->get();
+        return Inertia::render('Course/Index', ['courses' => $courses]);
     }
 
     /**
@@ -20,7 +23,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $programs = Program::all();
+        return Inertia::render('Course/Create', ['programs' => $programs]);
     }
 
     /**
@@ -28,7 +32,8 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Course::create($request->validated());
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -36,7 +41,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        return $course;
     }
 
     /**
@@ -44,7 +49,8 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        $programs = Program::all();
+        return Inertia::render('Course/Edit', ['programs' => $programs]);
     }
 
     /**
@@ -52,7 +58,7 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -60,6 +66,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect()->route('courses.index');
     }
 }

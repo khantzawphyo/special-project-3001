@@ -2,26 +2,18 @@ import FacultyDeptCard from '@/Components/FacultyDeptCard';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
-export default function Index({ departments }) {
+export default function Index({ departments, noOfDepartments }) {
     return (
         <>
             <AuthLayout>
                 <Head title="Departments" />
                 <div className="mb-5">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-semibold">
-                            Total Departments
-                            <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
-                                10
-                            </span>
-                        </h2>
-                        <Link
-                            href={route('faculties.index')}
-                            className="text-lg font-semibold text-[#925FE2]"
-                        >
-                            See all
-                        </Link>
-                    </div>
+                    <h2 className="text-2xl font-semibold">
+                        Total Departments
+                        <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
+                            {noOfDepartments}
+                        </span>
+                    </h2>
                     <div className="mt-5 grid grid-cols-4 justify-between gap-x-8">
                         <FacultyDeptCard name="Computer Science" count={10} />
                         <FacultyDeptCard name="Computing" count={3} />
@@ -30,23 +22,33 @@ export default function Index({ departments }) {
                     </div>
                 </div>
 
-                <Link
-                    href={route('departments.create')}
-                    className="hidden w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
-                >
-                    Create
-                </Link>
-
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full bg-white text-left text-sm dark:text-gray-400 rtl:text-right">
                         <caption className="space-x-3 bg-white px-6 py-3 text-left text-xl font-semibold">
-                            <div className="flex items-center">
-                                <span className="">Department Members</span>
-                                <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800">
-                                    Department of Computer Science
-                                </span>
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                    <span className="">Department Lists</span>
+                                    <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800">
+                                        Departments Information
+                                    </span>
+                                </div>
+                                <div className="flex items-center justify-between gap-x-3">
+                                    <Link
+                                        href={route('faculties.create')}
+                                        className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                                    >
+                                        Export
+                                    </Link>
+                                    <Link
+                                        href={route('faculties.create')}
+                                        className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                                    >
+                                        Create
+                                    </Link>
+                                </div>
                             </div>
                         </caption>
+
                         <thead className="bg-gray-50 text-[14px] text-gray-600">
                             <tr className="border border-y-gray-200">
                                 <th scope="col" className="px-6 py-3">

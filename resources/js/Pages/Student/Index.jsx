@@ -2,14 +2,7 @@ import FacultyDeptCard from '@/Components/FacultyDeptCard';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
-export default function Index({
-    faculties,
-    noOfFaculty,
-    noOfProfessor,
-    noOfAssistProf,
-    noOfLecturer,
-    noOfAssistLect,
-}) {
+export default function Index({ students, noOfStudent }) {
     const transformName = (name) => {
         return '@' + name.split(' ').slice(1).join('_').toLowerCase();
     };
@@ -17,28 +10,19 @@ export default function Index({
     return (
         <>
             <AuthLayout>
-                <Head title="All Faculties" />
+                <Head title="All Students" />
                 <div className="mb-5">
                     <h2 className="text-2xl font-semibold">
-                        Total Faculties
+                        Total Students
                         <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
-                            {noOfFaculty}
+                            {noOfStudent}
                         </span>
                     </h2>
                     <div className="mt-5 grid grid-cols-2 justify-between gap-3 xl:grid-cols-4 xl:gap-x-8">
-                        <FacultyDeptCard
-                            name="Professor"
-                            count={noOfProfessor}
-                        />
-                        <FacultyDeptCard
-                            name="Associate Professor"
-                            count={noOfAssistProf}
-                        />
-                        <FacultyDeptCard name="Lecturer" count={noOfLecturer} />
-                        <FacultyDeptCard
-                            name="Assistant Lecture"
-                            count={noOfAssistLect}
-                        />
+                        <FacultyDeptCard name="BE-2019" count={120} />
+                        <FacultyDeptCard name="BE-2020" count={120} />
+                        <FacultyDeptCard name="BE-2021" count={120} />
+                        <FacultyDeptCard name="BE-2022" count={120} />
                     </div>
                 </div>
 
@@ -47,9 +31,9 @@ export default function Index({
                         <caption className="space-x-3 bg-white px-6 py-3 text-left text-xl font-semibold">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    <span className="">Faculty Lists</span>
+                                    <span className="">Student Lists</span>
                                     <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800">
-                                        Faculty of Computer Science
+                                        For Academic Years
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between gap-x-3">
@@ -60,7 +44,7 @@ export default function Index({
                                         Export
                                     </Link>
                                     <Link
-                                        href={route('faculties.create')}
+                                        href={route('students.create')}
                                         className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                                     >
                                         Create
@@ -74,10 +58,13 @@ export default function Index({
                                     Name
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Rank
+                                    Gender
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Email Address
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Major
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Courses
@@ -88,9 +75,9 @@ export default function Index({
                             </tr>
                         </thead>
                         <tbody>
-                            {faculties.map((faculty) => (
+                            {students.map((student) => (
                                 <tr
-                                    key={faculty.id}
+                                    key={student.id}
                                     className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
                                 >
                                     <th
@@ -104,25 +91,28 @@ export default function Index({
                                         />
                                         <div className="ps-3">
                                             <div className="text-base font-semibold">
-                                                {faculty.name}
+                                                {student.name}
                                             </div>
                                             <div className="font-normal text-gray-500">
-                                                {transformName(faculty.name)}
+                                                {transformName(student.name)}
                                             </div>
                                         </div>
                                     </th>
                                     <td className="px-6 py-1.5">
-                                        {faculty.role.title}
+                                        {student.gender}
                                     </td>
                                     <td className="px-6 py-1.5">
-                                        {faculty.email}
+                                        {student.email}
+                                    </td>
+                                    <td className="px-6 py-1.5">
+                                        {student.major.name}
                                     </td>
                                     <td className="px-6 py-1.5">
                                         <span className="me-2 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
                                             Design
                                         </span>
                                         <span className="me-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800">
-                                            Design
+                                            Process
                                         </span>
                                     </td>
                                     <td className="flex justify-start gap-x-4 px-6 py-1.5">
@@ -131,8 +121,8 @@ export default function Index({
                                                 e.preventDefault();
                                                 router.delete(
                                                     route(
-                                                        'faculties.destroy',
-                                                        faculty,
+                                                        'students.destroy',
+                                                        student,
                                                     ),
                                                 );
                                             }}
@@ -168,8 +158,8 @@ export default function Index({
                                         </form>
                                         <Link
                                             href={route(
-                                                'faculties.edit',
-                                                faculty,
+                                                'students.edit',
+                                                student,
                                             )}
                                             className="font-medium text-yellow-600 hover:underline dark:text-yellow-500"
                                         >

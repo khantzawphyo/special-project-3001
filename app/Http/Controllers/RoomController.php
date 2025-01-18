@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Room\RoomRequest;
 use App\Models\Room;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,8 +15,11 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
-        return Inertia::render('Room/Index', ['rooms' => $rooms]);
+        $rooms = Room::with(['roomType'])->get();
+        $noOfTypeA = Room::where('room_type_id', 1)->count();
+        $noOfTypeB = Room::where('room_type_id', 2)->count();
+
+        return Inertia::render('Room/Index', ['rooms' => $rooms, 'noOfTypeA' => $noOfTypeA, 'noOfTypeB' => $noOfTypeB]);
     }
 
     /**
@@ -23,7 +27,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Room/Create');
+        $roomTypes = RoomType::all();
+        return Inertia::render('Room/Create', ['roomTypes' => $roomTypes]);
     }
 
     /**
@@ -48,7 +53,9 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        return Inertia::render('Room/Edit', ['room' => $room]);
+        $roomTypes = RoomType::all();
+
+        return Inertia::render('Room/Edit', ['room' => $room, 'roomTypes' => $roomTypes]);
     }
 
     /**

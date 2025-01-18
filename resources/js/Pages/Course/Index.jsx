@@ -1,23 +1,54 @@
+import RoomCard from '@/Components/RoomCard';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
 export default function Index({ courses }) {
-    console.log(courses);
-
-    // return null;
-
     return (
         <>
             <AuthLayout>
-                <Head title="Courses" />
-                <Link
-                    href={route('courses.create')}
-                    className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
-                >
-                    Create
-                </Link>
+                <Head title="All Courses" />
+                <div className="mb-5">
+                    <h2 className="text-2xl font-semibold">
+                        Total Courses
+                        <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
+                            {10 + 10}
+                        </span>
+                    </h2>
+
+                    <div className="mt-5 grid justify-between gap-x-4 md:grid-cols-3 2xl:grid-cols-5">
+                        <RoomCard name="CSE and ECE" count={20} />
+                        <RoomCard name="CSE" count={10} />
+                        <RoomCard name="ECE" count={10} />
+                    </div>
+                </div>
+
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full bg-white text-left text-sm dark:text-gray-400 rtl:text-right">
+                        <caption className="space-x-3 bg-white px-6 py-3 text-left text-xl font-semibold">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                    <span className="">Course Lists</span>
+                                    <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800">
+                                        Courses Information
+                                    </span>
+                                </div>
+                                <div className="flex items-center justify-between gap-x-3">
+                                    <Link
+                                        href={route('faculties.create')}
+                                        className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                                    >
+                                        Export
+                                    </Link>
+                                    <Link
+                                        href={route('faculties.create')}
+                                        className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                                    >
+                                        Create
+                                    </Link>
+                                </div>
+                            </div>
+                        </caption>
+
                         <thead className="bg-gray-300 text-xs uppercase">
                             <tr>
                                 <th scope="col" className="px-6 py-3">

@@ -4,7 +4,12 @@ import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link } from '@inertiajs/react';
 import StudentImg from '/public/assets/student.png';
 
-export default function Dashboard({ faculties }) {
+export default function Dashboard({
+    faculties,
+    noOfFaculty,
+    noOfStudent,
+    noOfCourse,
+}) {
     return (
         <>
             <AuthLayout>
@@ -34,7 +39,8 @@ export default function Dashboard({ faculties }) {
                         <h2 className="mb-4 text-xl font-bold">Overview</h2>
                         <div className="grid grid-cols-3 gap-x-3 xl:gap-x-10">
                             <OverviewCard
-                                count={96}
+                                path={route('faculties.index')}
+                                count={noOfFaculty}
                                 icon={
                                     <svg
                                         className="mx-auto"
@@ -72,7 +78,8 @@ export default function Dashboard({ faculties }) {
                             />
 
                             <OverviewCard
-                                count={400}
+                                path={route('students.index')}
+                                count={noOfStudent}
                                 icon={
                                     <svg
                                         width="90"
@@ -109,7 +116,8 @@ export default function Dashboard({ faculties }) {
                             />
 
                             <OverviewCard
-                                count={100}
+                                path={route('courses.index')}
+                                count={noOfCourse}
                                 icon={
                                     <svg
                                         width={90}

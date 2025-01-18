@@ -13,6 +13,8 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+    Route::redirect('/', '/sign-in');
+
     Route::get('sign-up', [RegisteredUserController::class, 'create'])
         ->name('sign-up');
 
@@ -58,4 +60,3 @@ Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
-

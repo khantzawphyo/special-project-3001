@@ -91,6 +91,7 @@ export default function SideBar() {
                         }
                         routeName="Dashboard"
                     />
+
                     <SideBarLink
                         routeLink={route('dashboard')}
                         icon={
@@ -118,8 +119,9 @@ export default function SideBar() {
                         }
                         routeName="Time Tables"
                     />
+
                     <SideBarLink
-                        routeLink={route('rooms.index')}
+                        routeLink={route('students.index')}
                         icon={
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -146,6 +148,7 @@ export default function SideBar() {
                         }
                         routeName="Students"
                     />
+
                     <SideBarLink
                         routeLink={route('courses.index')}
                         icon={
@@ -260,8 +263,9 @@ export default function SideBar() {
                         }
                         routeName="Departments"
                     />
+
                     <SideBarLink
-                        routeLink={route('departments.index')}
+                        routeLink={route('settings.index')}
                         icon={
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

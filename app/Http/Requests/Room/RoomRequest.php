@@ -23,7 +23,7 @@ class RoomRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:255',
-            'capacity' => 'required|numeric',
+            'room_type_id' => 'required|integer|exists:room_types,id',
         ];
     }
 }

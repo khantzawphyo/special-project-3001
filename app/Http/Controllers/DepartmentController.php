@@ -15,7 +15,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $departments = Department::all();
-        return Inertia::render('Department/Index', ['departments' => $departments]);
+        return Inertia::render('Department/Index', ['departments' => $departments, 'noOfDepartments' => $departments->count()]);
     }
 
     /**

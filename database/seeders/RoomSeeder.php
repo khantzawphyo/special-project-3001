@@ -18,7 +18,7 @@ class RoomSeeder extends Seeder
 
             Room::create([
                 'name' => $roomName,
-                'capacity' => fake()->randomElement([60, 120])
+                'room_type_id' => fake()->randomElement([1, 2])
             ]);
         }
     }

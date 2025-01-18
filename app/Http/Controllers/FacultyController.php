@@ -18,7 +18,26 @@ class FacultyController extends Controller
     public function index()
     {
         $faculties = Faculty::with(['department', 'role'])->get();
-        return Inertia::render('Faculty/Index', ['faculties' => $faculties]);
+
+        // Group faculties by their role
+        $roleCounts = $faculties->groupBy('role.title')->map(function ($group) {
+            return $group->count();
+        });
+
+        // Extract counts based on roles
+        $noOfProfessor = $roleCounts->get('Professor', 0);
+        $noOfAssistProf = $roleCounts->get('Associate Professor', 0);
+        $noOfLecturer = $roleCounts->get('Lecturer', 0);
+        $noOfAssistLect = $roleCounts->get('Assistant Lecturer', 0);
+
+        return Inertia::render('Faculty/Index', [
+            'faculties' => $faculties,
+            'noOfFaculty' => $faculties->count(),
+            'noOfProfessor' => $noOfProfessor,
+            'noOfAssistProf' => $noOfAssistProf,
+            'noOfLecturer' => $noOfLecturer,
+            'noOfAssistLect' => $noOfAssistLect,
+        ]);
     }
 
     /**

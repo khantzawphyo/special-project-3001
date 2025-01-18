@@ -1,6 +1,6 @@
 import SideBar from '@/Components/SideBar';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function AuthLayout({ children }) {
     return (
@@ -43,8 +43,8 @@ export default function AuthLayout({ children }) {
                             </svg>
                             <span className="sr-only">Toggle sidebar</span>
                         </button>
-                        <a
-                            href="https://miit.edu.mm"
+                        <Link
+                            href="/"
                             className="order-2 mr-4 flex items-center justify-between md:order-1"
                         >
                             <img
@@ -52,7 +52,7 @@ export default function AuthLayout({ children }) {
                                 className="mr-3 h-14 md:mx-10"
                                 alt="MIIT"
                             />
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="flex items-center lg:order-2">

@@ -1,30 +1,38 @@
-import { Head } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import AuthLayout from './AuthLayout';
 
 export default function SettingLayout({ children }) {
+    const { url } = usePage();
+
+    const settingLinks = [
+        { path: '/settings/edit-profile', label: 'Edit Profile' },
+        { path: '/settings/preference', label: 'Preferences' },
+        { path: '/settings/security', label: 'Security' },
+    ];
+
     return (
         <AuthLayout>
             <Head title="Settings" />
-            <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
-                <ul className="-mb-px flex flex-wrap text-center text-sm font-medium">
-                    <li className="me-2">
-                        <button className="inline-block rounded-t-lg border-b-2 p-4">
-                            Edit Profile
-                        </button>
-                    </li>
-                    <li className="me-2">
-                        <button className="inline-block rounded-t-lg border-b-2 p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300">
-                            Preferences
-                        </button>
-                    </li>
-                    <li className="me-2">
-                        <button className="inline-block rounded-t-lg border-b-2 p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300">
-                            Settings
-                        </button>
-                    </li>
-                </ul>
+            <div className="w-full rounded-3xl bg-white p-8 pt-10">
+                <div className="border-b-2 border-[#F4F4F5]">
+                    <ul className="-mb-0.5 flex flex-wrap gap-x-5 text-center text-base font-medium">
+                        {settingLinks.map((settingLink) => (
+                            <li
+                                key={settingLink.path}
+                                className="text-[#3D2E58]"
+                            >
+                                <Link
+                                    href={settingLink.path}
+                                    className={`inline-block rounded-t-full p-4 hover:border-[#3D2E58] ${url === settingLink.path ? 'border-b-2 border-[#3D2E58]' : ''}`}
+                                >
+                                    {settingLink.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className="mt-16 rounded-lg">{children}</div>
             </div>
-            {children}
         </AuthLayout>
     );
 }

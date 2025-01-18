@@ -2,7 +2,8 @@ import { Link, usePage } from '@inertiajs/react';
 
 export default function SideBarLink({ routeLink, icon, routeName }) {
     const { url } = usePage();
-    const isActive = url === '/' + routeName.toLowerCase();
+
+    const isActive = url.startsWith('/' + routeName.toLowerCase());
 
     return (
         <li>

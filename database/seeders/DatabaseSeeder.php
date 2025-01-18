@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             RoomSeeder::class,
             RoleSeeder::class,
             DepartmentSeeder::class,
+            StudentSeeder::class,
             FacultySeeder::class,
             ProgramSeeder::class,
             CourseSeeder::class,

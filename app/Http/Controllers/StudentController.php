@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StudentsExport;
 use App\Models\Major;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -16,6 +18,12 @@ class StudentController extends Controller
     {
         $students = Student::with(['major'])->get();
         return Inertia::render('Student/Index', ['students' => $students, 'noOfStudent' => $students->count()]);
+    }
+
+    public function exportExcel()
+    {
+        $fileName = 'students-' . now()->format('d-m-Y') . '.xlsx';
+        return Excel::download(new StudentsExport, $fileName);
     }
 
     /**

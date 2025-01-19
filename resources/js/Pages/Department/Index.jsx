@@ -33,12 +33,12 @@ export default function Index({ departments, noOfDepartments }) {
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between gap-x-3">
-                                    <Link
-                                        href={route('faculties.create')}
+                                    <a
+                                        href={route('departments.export-excel')}
                                         className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                                     >
-                                        Export
-                                    </Link>
+                                        Export Excel
+                                    </a>
                                     <Link
                                         href={route('faculties.create')}
                                         className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
@@ -49,7 +49,7 @@ export default function Index({ departments, noOfDepartments }) {
                             </div>
                         </caption>
 
-                        <thead className="bg-gray-50 text-[14px] text-gray-600">
+                        <thead className="bg-gray-300 text-[15px] capitalize text-gray-800">
                             <tr className="border border-y-gray-200">
                                 <th scope="col" className="px-6 py-3">
                                     Name

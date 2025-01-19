@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DepartmentsExport;
 use App\Http\Requests\Dept\DepartmentRequest;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DepartmentController extends Controller
 {
@@ -16,6 +18,12 @@ class DepartmentController extends Controller
     {
         $departments = Department::all();
         return Inertia::render('Department/Index', ['departments' => $departments, 'noOfDepartments' => $departments->count()]);
+    }
+
+    public function exportExcel()
+    {
+        $fileName = 'departments-' . now()->format('d-m-Y') . '.xlsx';
+        return Excel::download(new DepartmentsExport, $fileName);
     }
 
     /**

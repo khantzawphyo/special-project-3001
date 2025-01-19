@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FacultiesExport;
 use App\Http\Requests\Faculty\StoreFacultyRequest;
 use App\Models\Faculty;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use App\Http\Requests\Faculty\UpdateFacultyRequest;
 use App\Models\Department;
 use App\Models\Role;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FacultyController extends Controller
 {
@@ -38,6 +40,12 @@ class FacultyController extends Controller
             'noOfLecturer' => $noOfLecturer,
             'noOfAssistLect' => $noOfAssistLect,
         ]);
+    }
+
+    public function exportExcel()
+    {
+        $fileName = 'faculties-' . now()->format('d-m-Y') . '.xlsx';
+        return Excel::download(new FacultiesExport, $fileName);
     }
 
     /**

@@ -5,7 +5,7 @@ import adminImg from '/public/assets/admin.jpg';
 export default function Security() {
     return (
         <SettingLayout>
-            <Head title="Settings - Edit Profile" />
+            <Head title="Settings - Security" />
             <div className="grid h-full grid-cols-8 gap-x-10">
                 <div className="col-span-2 flex h-full justify-end">
                     <div className="relative h-28 w-28 rounded-full">

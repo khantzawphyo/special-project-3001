@@ -9,7 +9,7 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'course_code', 'credit', 'program_id'];
+    protected $fillable = ['title', 'course_code', 'credit', 'semester_id', 'program_id', 'faculty_id'];
 
     public function setTitleAttribute($value)
     {
@@ -19,6 +19,21 @@ class Course extends Model
     public function setCourseCodeAttribute($value)
     {
         $this->attributes['course_code'] = ucwords($value);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
+    }
+
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class);
+    }
+
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
     }
 
     public function program()

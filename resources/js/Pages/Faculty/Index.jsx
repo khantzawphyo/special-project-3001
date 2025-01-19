@@ -1,6 +1,7 @@
 import FacultyDeptCard from '@/Components/FacultyDeptCard';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
+import facultyImg from '/public/assets/user.jpg';
 
 export default function Index({
     faculties,
@@ -53,12 +54,12 @@ export default function Index({
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between gap-x-3">
-                                    <Link
-                                        href={route('faculties.create')}
+                                    <a
+                                        href={route('faculties.export-excel')}
                                         className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                                     >
-                                        Export
-                                    </Link>
+                                        Export Excel
+                                    </a>
                                     <Link
                                         href={route('faculties.create')}
                                         className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
@@ -68,7 +69,7 @@ export default function Index({
                                 </div>
                             </div>
                         </caption>
-                        <thead className="bg-gray-50 text-[14px] text-gray-600">
+                        <thead className="bg-gray-300 text-[15px] capitalize text-gray-800">
                             <tr className="border border-y-gray-200">
                                 <th scope="col" className="px-6 py-3">
                                     Name
@@ -78,6 +79,9 @@ export default function Index({
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Email Address
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Department
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Courses
@@ -99,7 +103,7 @@ export default function Index({
                                     >
                                         <img
                                             className="h-10 w-10 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+                                            src={facultyImg}
                                             alt="Jese image"
                                         />
                                         <div className="ps-3">
@@ -116,6 +120,9 @@ export default function Index({
                                     </td>
                                     <td className="px-6 py-1.5">
                                         {faculty.email}
+                                    </td>
+                                    <td className="px-6 py-1.5">
+                                        {faculty.department.name}
                                     </td>
                                     <td className="px-6 py-1.5">
                                         <span className="me-2 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">

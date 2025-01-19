@@ -9,7 +9,7 @@ class Student extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'gender', 'major_id'];
+    protected $fillable = ['name', 'email', 'gender', 'major_id', 'semester_id'];
 
     public function setNameAttribute($value)
     {
@@ -28,6 +28,6 @@ class Student extends Model
 
     public function courses()
     {
-        // return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class);
     }
 }

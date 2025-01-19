@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CoursesExport;
 use App\Models\Course;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CourseController extends Controller
 {
@@ -14,8 +16,31 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with(['program'])->get();
-        return Inertia::render('Course/Index', ['courses' => $courses]);
+        $courses = Course::with(['program', 'faculty'])->get();
+
+        // Group courses by their program
+        $roleCounts = $courses->groupBy('program.name')->map(function ($group) {
+            return $group->count();
+        });
+
+        // Extract counts based on program
+        $noOfCSE = $roleCounts->get('CSE', 0);
+        $noOfECE = $roleCounts->get('ECE', 0);
+        $noOfBoth = $roleCounts->get('CSE and ECE', 0);
+
+        return Inertia::render('Course/Index', [
+            'courses' => $courses,
+            'noOfCSECourses' => $noOfCSE,
+            'noOfECECourses' => $noOfECE,
+            'noOfBothCourses' => $noOfBoth,
+            'totalCourses' => $courses->count(),
+        ]);
+    }
+
+    public function exportExcel()
+    {
+        $fileName = 'courses-' . now()->format('d-m-Y') . '.xlsx';
+        return Excel::download(new CoursesExport, $fileName);
     }
 
     /**

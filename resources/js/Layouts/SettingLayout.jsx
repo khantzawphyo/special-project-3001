@@ -1,8 +1,9 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import AuthLayout from './AuthLayout';
 
 export default function SettingLayout({ children }) {
     const { url } = usePage();
+    const { post } = useForm();
 
     const settingLinks = [
         { path: '/settings/edit-profile', label: 'Edit Profile' },
@@ -14,7 +15,7 @@ export default function SettingLayout({ children }) {
         <AuthLayout>
             <Head title="Settings" />
             <div className="w-full rounded-3xl bg-white p-8 pt-10">
-                <div className="border-b-2 border-[#F4F4F5]">
+                <div className="flex items-center justify-between border-b-2 border-[#F4F4F5]">
                     <ul className="-mb-0.5 flex flex-wrap gap-x-5 text-center text-base font-medium">
                         {settingLinks.map((settingLink) => (
                             <li
@@ -30,6 +31,20 @@ export default function SettingLayout({ children }) {
                             </li>
                         ))}
                     </ul>
+                    <form
+                        method="post"
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            post(route('logout'));
+                        }}
+                    >
+                        <button
+                            type="submit"
+                            className="rounded-xl bg-[#3D2E58] px-10 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                        >
+                            Logout
+                        </button>
+                    </form>
                 </div>
                 <div className="mt-16 rounded-lg">{children}</div>
             </div>

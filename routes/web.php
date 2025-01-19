@@ -16,11 +16,19 @@ Route::middleware('auth')->group(function () {
     Route::resource('rooms', RoomController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('faculties', FacultyController::class);
+
+    Route::get('/courses/export-to-excel', [CourseController::class, 'exportExcel'])->name('courses.export-excel');
     Route::resource('courses', CourseController::class);
+
     Route::resource('students', StudentController::class);
-    Route::get('add-new-timetable', function () {
+
+    Route::get('timetables', function () {
+        return Inertia::render('Timetable/Index');
+    })->name('timetables.index');
+
+    Route::get('new-timetable', function () {
         // return Inertia::render('AddTimetable');
-    })->name('timetable.add');
+    })->name('timetables.add');
 });
 
 Route::get('file-upload-to-s3', function () {

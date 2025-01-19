@@ -1,6 +1,7 @@
 import FacultyDeptCard from '@/Components/FacultyDeptCard';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
+import studentImg from '/public/assets/user.jpg';
 
 export default function Index({ students, noOfStudent }) {
     const transformName = (name) => {
@@ -52,16 +53,16 @@ export default function Index({ students, noOfStudent }) {
                                 </div>
                             </div>
                         </caption>
-                        <thead className="bg-gray-50 text-[14px] text-gray-600">
+                        <thead className="bg-gray-300 text-[15px] capitalize text-gray-800">
                             <tr className="border border-y-gray-200">
                                 <th scope="col" className="px-6 py-3">
                                     Name
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Gender
+                                    Email Address
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Email Address
+                                    Gender
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Major
@@ -86,7 +87,7 @@ export default function Index({ students, noOfStudent }) {
                                     >
                                         <img
                                             className="h-10 w-10 rounded-full"
-                                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+                                            src={studentImg}
                                             alt="Jese image"
                                         />
                                         <div className="ps-3">
@@ -99,10 +100,10 @@ export default function Index({ students, noOfStudent }) {
                                         </div>
                                     </th>
                                     <td className="px-6 py-1.5">
-                                        {student.gender}
+                                        {student.email}
                                     </td>
                                     <td className="px-6 py-1.5">
-                                        {student.email}
+                                        {student.gender}
                                     </td>
                                     <td className="px-6 py-1.5">
                                         {student.major.name}

@@ -41,7 +41,7 @@ export default function SideBar() {
                 <ul className="space-y-1 px-4 py-8 pt-10 text-center text-white">
                     <li className="mb-14">
                         <Link
-                            href={route('timetable.add')}
+                            href={route('timetables.add')}
                             className="mb-2 me-2 inline-flex w-[170px] items-center rounded-full bg-white px-3 py-1 text-center text-sm font-medium text-[#925FE2] hover:text-[#925FE2] focus:outline-none"
                         >
                             <svg
@@ -93,7 +93,7 @@ export default function SideBar() {
                     />
 
                     <SideBarLink
-                        routeLink={route('dashboard')}
+                        routeLink={route('timetables.index')}
                         icon={
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ export default function SideBar() {
                                 <path d="M12 7v5" />
                             </svg>
                         }
-                        routeName="Time Tables"
+                        routeName="Timetables"
                     />
 
                     <SideBarLink

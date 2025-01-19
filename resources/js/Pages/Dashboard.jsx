@@ -1,29 +1,36 @@
 import OverviewCard from '@/Components/OverviewCard';
 import OverviewFaculty from '@/Components/OverviewFaculty';
+import RoomCard from '@/Components/RoomCard';
 import AuthLayout from '@/Layouts/AuthLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import StudentImg from '/public/assets/student.png';
 
 export default function Dashboard({
+    currentDate,
     faculties,
     noOfFaculty,
     noOfStudent,
     noOfCourse,
 }) {
+    const {
+        auth: { user },
+    } = usePage().props;
+
     return (
         <>
             <AuthLayout>
                 <Head title="Dashboard" />
                 <div className="grid grid-cols-1 items-center rounded-3xl bg-gradient-to-l from-[#6D5394] to-[#3B2C55] p-8 pt-10 text-white lg:grid-cols-3 lg:pe-10 lg:ps-16">
                     <div className="col-span-2 space-y-12">
-                        <p className="font-semibold">January 24, 2025</p>
+                        <p className="font-semibold">{currentDate}</p>
                         <div className="space-y-2">
                             <h2 className="text-3xl font-semibold lg:text-4xl">
-                                Welcome Back, Daw Win Aye!
+                                Welcome Back, {user.name}!
                             </h2>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Sed, cupiditate.
+                                Ready to plan your perfect exam schedule? Let's
+                                get started with your personalized exam
+                                timetable.
                             </p>
                         </div>
                     </div>
@@ -183,12 +190,20 @@ export default function Dashboard({
 
                 <div className="mb-4 grid grid-cols-6 gap-8 rounded-3xl">
                     <div className="col-span-4 h-48 rounded-3xl">
-                        <p className="mb-2 text-xl font-bold">
-                            Exam TimeTables
-                        </p>
-                        <div className="grid h-32 grid-cols-10 gap-x-3 lg:h-48 lg:gap-x-10">
-                            <div className="col-span-5 h-full rounded-3xl border-4 border-purple-600/80"></div>
-                            <div className="col-span-5 h-full rounded-3xl border-4 border-purple-600/80"></div>
+                        <div className="mb-3 flex justify-between font-semibold">
+                            <p className="mb-2 text-xl font-bold">
+                                Exam Timetables
+                            </p>
+                            <Link
+                                href={route('timetables.index')}
+                                className="text-lg font-semibold text-[#925FE2]"
+                            >
+                                See all
+                            </Link>
+                        </div>
+                        <div className="mt-5 grid grid-cols-1 justify-between gap-x-4 md:grid-cols-2 2xl:grid-cols-3">
+                            <RoomCard name="Timetable 1" count={1} />
+                            <RoomCard name="Timetable 2" count={2} />
                         </div>
                     </div>
                 </div>

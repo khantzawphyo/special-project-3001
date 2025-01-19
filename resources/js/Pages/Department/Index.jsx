@@ -6,7 +6,7 @@ export default function Index({ departments, noOfDepartments }) {
     return (
         <>
             <AuthLayout>
-                <Head title="Departments" />
+                <Head title="All Departments" />
                 <div className="mb-5">
                     <h2 className="text-2xl font-semibold">
                         Total Departments

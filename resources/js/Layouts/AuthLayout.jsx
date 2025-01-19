@@ -1,8 +1,13 @@
 import SideBar from '@/Components/SideBar';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import facultyImg from '/public/assets/admin.jpg';
 
 export default function AuthLayout({ children }) {
+    const {
+        auth: { user },
+    } = usePage().props;
+
     return (
         <div className="bg-[#F4F4F5] antialiased">
             <Head title="Dashboard" />
@@ -89,11 +94,11 @@ export default function AuthLayout({ children }) {
                                 <span className="sr-only">Open user menu</span>
                                 <img
                                     className="h-10 w-10 rounded-full"
-                                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+                                    src={facultyImg}
                                     alt="John Doe"
                                 />
                                 <div className="flex flex-col items-start">
-                                    <p>Daw Win Aye</p>
+                                    <p>{user.name}</p>
                                     <span className="text-gray-400">
                                         Professor
                                     </span>

@@ -27,8 +27,15 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email', 'exists:users,email'],
+            'email' => ['required', 'string', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@miit\.edu\.mm$/', 'exists:users,email'],
             'password' => ['required', 'string'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.regex' => 'The email must belong to the domain @miit.edu.mm.',
         ];
     }
 

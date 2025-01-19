@@ -9,7 +9,7 @@ class Faculty extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'gender', 'password', 'phone_number', 'email', 'role_id', 'department_id'];
+    protected $fillable = ['name', 'gender', 'phone_number', 'email', 'role_id', 'department_id'];
 
     public function setPasswordAttribute($value)
     {
@@ -26,8 +26,8 @@ class Faculty extends Model
         return $this->belongsTo(Department::class);
     }
 
-    public function image()
+    public function courses()
     {
-        // return $this->morphOne(Image::class, 'imageable');
+        return $this->hasMany(Course::class);
     }
 }

@@ -2,7 +2,13 @@ import RoomCard from '@/Components/RoomCard';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
-export default function Index({ courses }) {
+export default function Index({
+    courses,
+    noOfCSECourses,
+    noOfECECourses,
+    noOfBothCourses,
+    totalCourses,
+}) {
     return (
         <>
             <AuthLayout>
@@ -11,14 +17,14 @@ export default function Index({ courses }) {
                     <h2 className="text-2xl font-semibold">
                         Total Courses
                         <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
-                            {10 + 10}
+                            {totalCourses}
                         </span>
                     </h2>
 
                     <div className="mt-5 grid justify-between gap-x-4 md:grid-cols-3 2xl:grid-cols-5">
-                        <RoomCard name="CSE and ECE" count={20} />
-                        <RoomCard name="CSE" count={10} />
-                        <RoomCard name="ECE" count={10} />
+                        <RoomCard name="CSE and ECE" count={noOfBothCourses} />
+                        <RoomCard name="CSE" count={noOfCSECourses} />
+                        <RoomCard name="ECE" count={noOfECECourses} />
                     </div>
                 </div>
 
@@ -33,14 +39,14 @@ export default function Index({ courses }) {
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between gap-x-3">
-                                    <Link
-                                        href={route('faculties.create')}
+                                    <a
+                                        href={route('courses.export-excel')}
                                         className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                                     >
-                                        Export
-                                    </Link>
+                                        Export Excel
+                                    </a>
                                     <Link
-                                        href={route('faculties.create')}
+                                        href={route('courses.create')}
                                         className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                                     >
                                         Create
@@ -49,13 +55,16 @@ export default function Index({ courses }) {
                             </div>
                         </caption>
 
-                        <thead className="bg-gray-300 text-xs uppercase">
+                        <thead className="bg-gray-300 text-[15px] capitalize text-gray-800">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
-                                    Name
+                                    Course Name
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Course Code
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Instructor
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Credit
@@ -82,6 +91,9 @@ export default function Index({ courses }) {
                                     </td>
                                     <td className="px-6 py-4">
                                         {course.course_code}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {course.faculty.name}
                                     </td>
                                     <td className="px-6 py-4">
                                         {course.credit}

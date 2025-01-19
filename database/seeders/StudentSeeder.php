@@ -14,7 +14,8 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         // Define years, departments, and roll numbers
-        $year_sems = ['2018' => 9, '2019' => 7, '2021' => 5, '2022' => 3, '2023' => 1];
+        // $year_sems = ['2018' => 9, '2019' => 7, '2021' => 5, '2022' => 3, '2023' => 1];
+        $year_sems = ['2018' => 9];
         $majors = ['cse', 'ece'];
 
         $rollNumbers = range(1, 60); // 001 to 060
@@ -28,7 +29,7 @@ class StudentSeeder extends Seeder
             foreach ($majors as $major) {
                 foreach ($rollNumbers as $rollNumber) {
                     $formattedRoll = str_pad($rollNumber, 3, '0', STR_PAD_LEFT); // Format as 001, 002, ...
-                    $email = "{$year}-{$major}-{$formattedRoll}@miit.edu.mm";
+                    $email = "{$year}-miit-{$major}-{$formattedRoll}@miit.edu.mm";
 
                     // Even rolls: Male, Odd rolls: Female
                     $isMale = $rollNumber % 2 == 0;
@@ -41,6 +42,7 @@ class StudentSeeder extends Seeder
                     $data[] = [
                         'name' => $nameComponents,
                         'email' => $email,
+                        'status' => 'Active',
                         'major_id' => fake()->randomElement([1, 2]),
                         'semester_id' => $sem_id,
                         'gender' => $isMale ? 'Male' : 'Female',

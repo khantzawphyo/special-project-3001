@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RoomsExport;
 use App\Http\Requests\Room\RoomRequest;
 use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RoomController extends Controller
 {
@@ -20,6 +22,12 @@ class RoomController extends Controller
         $noOfTypeB = Room::where('room_type_id', 2)->count();
 
         return Inertia::render('Room/Index', ['rooms' => $rooms, 'noOfTypeA' => $noOfTypeA, 'noOfTypeB' => $noOfTypeB]);
+    }
+
+    public function exportExcel()
+    {
+        $fileName = 'rooms-' . now()->format('d-m-Y') . '.xlsx';
+        return Excel::download(new RoomsExport, $fileName);
     }
 
     /**

@@ -38,12 +38,12 @@ export default function Index({ students, noOfStudent }) {
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between gap-x-3">
-                                    <Link
-                                        href={route('faculties.create')}
+                                    <a
+                                        href={route('students.export-excel')}
                                         className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                                     >
-                                        Export
-                                    </Link>
+                                        Export Excel
+                                    </a>
                                     <Link
                                         href={route('students.create')}
                                         className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
@@ -59,7 +59,13 @@ export default function Index({ students, noOfStudent }) {
                                     Name
                                 </th>
                                 <th scope="col" className="px-6 py-3">
+                                    Roll Number
+                                </th>
+                                <th scope="col" className="px-6 py-3">
                                     Email Address
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Status
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Gender
@@ -99,8 +105,31 @@ export default function Index({ students, noOfStudent }) {
                                             </div>
                                         </div>
                                     </th>
+                                    <td className="px-6 py-1.5 uppercase">
+                                        {student.email.split('@')[0]}
+                                    </td>
                                     <td className="px-6 py-1.5">
                                         {student.email}
+                                    </td>
+                                    <td className="px-6 py-1.5">
+                                        <p className="flex max-w-fit items-center justify-between rounded-full bg-green-100 px-2 py-0.5 pe-2.5 text-green-800">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={16}
+                                                height={16}
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                                className="icon icon-tabler icons-tabler-filled icon-tabler-point"
+                                            >
+                                                <path
+                                                    stroke="none"
+                                                    d="M0 0h24v24H0z"
+                                                    fill="none"
+                                                />
+                                                <path d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
+                                            </svg>
+                                            <span>{student.status}</span>
+                                        </p>
                                     </td>
                                     <td className="px-6 py-1.5">
                                         {student.gender}

@@ -64,7 +64,10 @@ export default function Index({
                                     Course Code
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Instructor
+                                    Course Type
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Instructor in Charge
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Credit
@@ -91,6 +94,24 @@ export default function Index({
                                     </td>
                                     <td className="px-6 py-4">
                                         {course.course_code}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <span
+                                            className={`me-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                                                course.course_type.name ===
+                                                'Core'
+                                                    ? 'bg-red-100 text-red-800'
+                                                    : course.course_type
+                                                            .name === 'Elective'
+                                                      ? 'bg-green-100 text-green-800'
+                                                      : course.course_type
+                                                              .name === 'Lab'
+                                                        ? 'bg-orange-100 text-orange-800'
+                                                        : ''
+                                            }`}
+                                        >
+                                            {course.course_type.name}
+                                        </span>
                                     </td>
                                     <td className="px-6 py-4">
                                         {course.faculty.name}

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Course;
 use App\Models\Department;
 use App\Models\Faculty;
-use App\Models\Role;
+use App\Models\Rank;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,8 +18,8 @@ class FacultySeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Daw Win Aye',
-            'email' => 'win_aye@miit.edu.mm',
+            'name' => 'Dr. Myat Thuzar Tun',
+            'email' => 'myat_thuzar_tun@miit.edu.mm',
             'password' => 'password',
             'created_at' => now(),
         ]);
@@ -51,7 +51,7 @@ class FacultySeeder extends Seeder
                 // 'password' => $hashedPassword,
                 'gender' => $isMale ? 'Male' : 'Female',
                 'phone_number' => $phoneNo,
-                'role_id' => fake()->numberBetween(1, Role::count()),
+                'rank_id' => fake()->numberBetween(1, Rank::count()),
                 'department_id' => fake()->numberBetween(1, Department::count()),
                 'created_at' => now(),
             ];

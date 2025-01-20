@@ -16,7 +16,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with(['program', 'faculty'])->get();
+        $courses = Course::with(['program', 'faculty', 'courseType'])->get();
 
         // Group courses by their program
         $roleCounts = $courses->groupBy('program.name')->map(function ($group) {

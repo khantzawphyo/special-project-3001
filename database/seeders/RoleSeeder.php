@@ -13,15 +13,12 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = [
-            ["title" => "Professor", "description" => "Senior academic leader specializing in specific fields."],
-            ["title" => "Associate Professor", "description" => "Mid-level academic role with research and teaching responsibilities."],
-            ["title" => "Lecturer", "description" => "Responsible for delivering lectures and guiding students."],
-            ["title" => "Assistant Lecturer", "description" => "Supports lecturers in teaching and grading."],
-        ];
+        Role::create([
+            'name' => 'Invigilator'
+        ]);
 
-        foreach ($roles as $role) {
-            Role::create($role);
-        }
+        Role::create([
+            'name' => 'Co-Invigilator'
+        ]);
     }
 }

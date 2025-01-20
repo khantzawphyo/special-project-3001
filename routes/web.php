@@ -6,6 +6,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
+use App\Models\Faculty;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -34,7 +35,10 @@ Route::middleware('auth')->group(function () {
     })->name('timetables.index');
 
     Route::get('new-timetable', function () {
-        // return Inertia::render('AddTimetable');
+
+        return Inertia::render('Timetable/NewTimetable', [
+            'faculties' => Faculty::all()
+        ]);
     })->name('timetables.add');
 });
 

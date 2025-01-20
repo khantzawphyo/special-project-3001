@@ -1,23 +1,79 @@
 import SideBar from '@/Components/SideBar';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link, usePage } from '@inertiajs/react';
-import facultyImg from '/public/assets/admin.jpg';
+import { useEffect, useRef, useState } from 'react';
+import facultyImg from '/public/assets/admin2.jpg';
 
 export default function AuthLayout({ children }) {
     const {
+        url,
         auth: { user },
     } = usePage().props;
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(
+        JSON.parse(localStorage.getItem('isSidebarOpen') || null),
+    ); // State for sidebar
+    const dropdownRef = useRef(null); // Create a ref for the dropdown
+    const sidebarRef = useRef(null);
+
+    const toggleDropdown = () => {
+        setIsOpen((prev) => !prev);
+    };
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen((prev) => !prev);
+    };
+
+    useEffect(() => {
+        localStorage.setItem('isSidebarOpen', true);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('isSidebarOpen', isSidebarOpen);
+    }, [isSidebarOpen]);
+
+    const handleClickOutside = (event) => {
+        if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+            setIsSidebarOpen(false);
+        }
+
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
+            setIsOpen(false);
+        }
+
+        if (
+            sidebarRef.current &&
+            !sidebarRef.current.contains(event.target) &&
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
+            setIsOpen(false);
+            setIsSidebarOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        // Add event listener for clicks
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            // Cleanup the event listener on component unmount
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <div className="bg-[#F4F4F5] antialiased">
             <Head title="Dashboard" />
             <nav className="fixed left-0 right-0 top-0 z-50 bg-[#F4F4F5] px-4 py-2.5 pe-12 dark:border-gray-700 dark:bg-gray-800">
                 <div className="flex flex-wrap items-center justify-between">
+                    {/* left button */}
                     <div className="flex items-center justify-between">
                         <button
-                            data-drawer-target="drawer-navigation"
-                            data-drawer-toggle="drawer-navigation"
-                            aria-controls="drawer-navigation"
+                            onClick={toggleSidebar}
                             className="text-purple-[#3D2E58] order-1 mr-2 block cursor-pointer rounded-lg p-2 md:order-2"
                         >
                             <svg
@@ -60,47 +116,29 @@ export default function AuthLayout({ children }) {
                         </Link>
                     </div>
 
-                    <div className="flex items-center lg:order-2">
+                    {/* right button */}
+                    <div
+                        className="relative flex flex-col items-center lg:order-2"
+                        ref={dropdownRef}
+                    >
                         <button
                             type="button"
-                            data-drawer-toggle="drawer-navigation"
-                            aria-controls="drawer-navigation"
-                            className="mr-1 rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600 md:hidden"
-                        >
-                            <span className="sr-only">Toggle search</span>
-                            <svg
-                                aria-hidden="true"
-                                className="h-6 w-6"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    clipRule="evenodd"
-                                    fillRule="evenodd"
-                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                />
-                            </svg>
-                        </button>
-
-                        <button
-                            type="button"
-                            className="mx-3 flex w-full items-center justify-between gap-x-8 rounded-full bg-white px-2 py-1.5 text-sm shadow-lg md:mr-0"
+                            className="flex w-full items-center justify-between rounded-full bg-white px-2 py-1.5 text-sm shadow-lg md:mx-3 md:mr-0 md:gap-x-8"
                             id="user-menu-button"
-                            aria-expanded="false"
-                            data-dropdown-toggle="dropdown"
+                            aria-expanded={isOpen}
+                            onClick={toggleDropdown}
                         >
                             <div className="flex gap-x-2">
                                 <span className="sr-only">Open user menu</span>
                                 <img
-                                    className="h-10 w-10 rounded-full"
+                                    className="h-12 w-12 rounded-full md:h-10 md:w-10"
                                     src={facultyImg}
-                                    alt="John Doe"
+                                    alt="Dr. Myat Thuzar Tun"
                                 />
-                                <div className="flex flex-col items-start">
+                                <div className="hidden flex-col items-start md:flex">
                                     <p>{user.name}</p>
                                     <span className="text-gray-400">
-                                        Professor
+                                        Pro-Rector
                                     </span>
                                 </div>
                             </div>
@@ -114,7 +152,7 @@ export default function AuthLayout({ children }) {
                                 strokeWidth={2}
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down m-2"
+                                className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down hidden md:m-2 md:block"
                             >
                                 <path
                                     stroke="none"
@@ -126,15 +164,15 @@ export default function AuthLayout({ children }) {
                         </button>
                         {/* Dropdown menu */}
                         <div
-                            className="z-50 my-4 hidden w-56 list-none divide-y divide-gray-100 rounded-xl bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700"
+                            className={`absolute right-0 top-10 z-50 my-4 w-48 list-none divide-y divide-gray-100 rounded-xl bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700 ${isOpen ? '' : 'hidden'}`}
                             id="dropdown"
                         >
-                            <div className="px-4 py-3">
+                            <div className="px-4 py-3 md:hidden">
                                 <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-                                    Daw Win Aye
+                                    Dr. Myat Thuzar Tun
                                 </span>
                                 <span className="block truncate text-sm text-gray-900 dark:text-white">
-                                    win_aye@miit.edu.mm
+                                    myat_thuzar_tun@miit.edu.mm
                                 </span>
                             </div>
                             <ul
@@ -142,74 +180,105 @@ export default function AuthLayout({ children }) {
                                 aria-labelledby="dropdown"
                             >
                                 <li>
-                                    <a
-                                        href="#"
-                                        className="block px-4 py-2 text-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    <Link
+                                        href={route('dashboard')}
+                                        className="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                                     >
-                                        My profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="block px-4 py-2 text-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    >
-                                        Account settings
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul
-                                className="py-1 text-gray-700 dark:text-gray-300"
-                                aria-labelledby="dropdown"
-                            >
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="flex items-center justify-between px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    >
-                                        <span className="flex items-center">
-                                            <svg
-                                                aria-hidden="true"
-                                                className="mr-2 h-5 w-5 text-primary-600 dark:text-primary-500"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                            Pro version
-                                        </span>
                                         <svg
-                                            aria-hidden="true"
-                                            className="h-5 w-5 text-gray-400"
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
+                                            width={24}
+                                            height={24}
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth={2}
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="icon icon-tabler icons-tabler-outline icon-tabler-layout-dashboard me-1.5"
                                         >
                                             <path
-                                                fillRule="evenodd"
-                                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                clipRule="evenodd"
+                                                stroke="none"
+                                                d="M0 0h24v24H0z"
+                                                fill="none"
                                             />
+                                            <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+                                            <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+                                            <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+                                            <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
                                         </svg>
-                                    </a>
+                                        Dashboard
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href={route('settings.index')}
+                                        className="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width={24}
+                                            height={24}
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth={2}
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="icon icon-tabler icons-tabler-outline icon-tabler-user-circle me-1.5"
+                                        >
+                                            <path
+                                                stroke="none"
+                                                d="M0 0h24v24H0z"
+                                                fill="none"
+                                            />
+                                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                                            <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                                        </svg>
+                                        My profile
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href={route('settings.index')}
+                                        className="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width={24}
+                                            height={24}
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth={2}
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="icon icon-tabler icons-tabler-outline icon-tabler-settings me-1.5"
+                                        >
+                                            <path
+                                                stroke="none"
+                                                d="M0 0h24v24H0z"
+                                                fill="none"
+                                            />
+                                            <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                                            <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                                        </svg>
+                                        Account settings
+                                    </Link>
                                 </li>
                             </ul>
                             <ul
                                 className="py-1 text-gray-700 dark:text-gray-300"
                                 aria-labelledby="dropdown"
                             >
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                <li className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    <Link
+                                        method="post"
+                                        as="button"
+                                        href={route('logout')}
                                     >
                                         Sign out
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -217,9 +286,11 @@ export default function AuthLayout({ children }) {
                 </div>
             </nav>
 
-            <SideBar />
+            <SideBar sidebarRef={sidebarRef} isSidebarOpen={isSidebarOpen} />
 
-            <MainLayout>{children}</MainLayout>
+            <MainLayout sidebarRef={sidebarRef} isSidebarOpen={isSidebarOpen}>
+                {children}
+            </MainLayout>
         </div>
     );
 }

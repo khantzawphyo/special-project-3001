@@ -14,7 +14,7 @@ class StudentsExport implements FromCollection, WithMapping, WithHeadings
      */
     public function collection()
     {
-        return Student::select(['name', 'email', 'gender', 'status', 'major_id'])->with(['major:id,name'])->get();
+        return Student::select(['name', 'email', 'status', 'major_id'])->with(['major:id,name'])->get();
     }
 
     public function map($student): array
@@ -26,13 +26,13 @@ class StudentsExport implements FromCollection, WithMapping, WithHeadings
             $rollNo,
             $student->email,
             $student->status,
-            $student->gender,
+            // $student->gender,
             $student->major->name,
         ];
     }
 
     public function headings(): array
     {
-        return ['Name', 'Roll Number', 'Email', 'Status', 'Gender', 'Major'];
+        return ['Name', 'Roll Number', 'Email', 'Status', 'Major'];
     }
 }

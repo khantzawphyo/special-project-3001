@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('course_code')->unique();
             $table->string('credit');
             $table->foreignId('semester_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('course_type_id')->constrained()->cascadeOnDelete();
             $table->foreignId('program_id')->constrained()->cascadeOnDelete();
             $table->foreignId('faculty_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

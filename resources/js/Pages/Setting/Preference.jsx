@@ -1,6 +1,6 @@
 import SettingLayout from '@/Layouts/SettingLayout';
 import { Head, Link } from '@inertiajs/react';
-import adminImg from '/public/assets/admin.jpg';
+import adminImg from '/public/assets/admin2.jpg';
 
 export default function Preference() {
     return (

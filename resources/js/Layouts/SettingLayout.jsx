@@ -42,7 +42,7 @@ export default function SettingLayout({ children }) {
                             type="submit"
                             className="rounded-xl bg-[#3D2E58] px-10 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                         >
-                            Logout
+                            Sign Out
                         </button>
                     </form>
                 </div>

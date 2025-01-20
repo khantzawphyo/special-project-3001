@@ -1,56 +1,25 @@
-import FacultyDeptCard from '@/Components/FacultyDeptCard';
 import AuthLayout from '@/Layouts/AuthLayout';
-import { Head, Link, router } from '@inertiajs/react';
-import facultyImg from '/public/assets/user.jpg';
+import { Head, Link } from '@inertiajs/react';
 
-export default function Index({
-    faculties,
-    noOfFaculty,
-    noOfProfessor,
-    noOfAssistProf,
-    noOfLecturer,
-    noOfAssistLect,
-}) {
-    const transformName = (name) => {
-        return '@' + name.split(' ').slice(1).join('_').toLowerCase();
-    };
-
+export default function NewTimetable({faculties}) {
     return (
-        <>
-            <AuthLayout>
-                <Head title="All Faculties" />
-                <div className="mb-5">
-                    <h2 className="text-2xl font-semibold">
-                        Total Faculties
-                        <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
-                            {noOfFaculty}
-                        </span>
-                    </h2>
-                    <div className="mt-5 grid grid-cols-2 justify-between gap-3 xl:grid-cols-4 xl:gap-x-8">
-                        <FacultyDeptCard
-                            name="Professor"
-                            count={noOfProfessor}
-                        />
-                        <FacultyDeptCard
-                            name="Associate Professor"
-                            count={noOfAssistProf}
-                        />
-                        <FacultyDeptCard name="Lecturer" count={noOfLecturer} />
-                        <FacultyDeptCard
-                            name="Assistant Lecture"
-                            count={noOfAssistLect}
-                        />
-                    </div>
+        <AuthLayout>
+            <Head title="Create Exam Schedule" />
+            <div className="mb-4 grid grid-cols-6 gap-8 rounded-3xl">
+                <div className="col-span-4 h-48 rounded-3xl">
+                    <p className="mb-2 text-xl font-bold">
+                        Create Exam Timetable
+                    </p>
+                    <div className="mt-5"></div>
                 </div>
-
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full bg-white text-left text-sm dark:text-gray-400 rtl:text-right">
                         <caption className="space-x-3 bg-white px-6 py-3 text-left text-xl font-semibold">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    <span className="">Faculty Lists</span>
+                                    <span className="">Exam Schedule</span>
                                     <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800">
-                                        Faculty of Computer Science
+                                        Examinations
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between gap-x-3">
@@ -116,7 +85,7 @@ export default function Index({
                                         </div>
                                     </th>
                                     <td className="px-6 py-1.5">
-                                        {faculty.rank.title}
+                                        {faculty.role.title}
                                     </td>
                                     <td className="px-6 py-1.5">
                                         {faculty.email}
@@ -207,7 +176,7 @@ export default function Index({
                         </tbody>
                     </table>
                 </div>
-            </AuthLayout>
-        </>
+            </div>
+        </AuthLayout>
     );
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Course;
+use App\Models\CourseType;
 use App\Models\Program;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,12 +15,21 @@ class CourseSeeder extends Seeder
      */
     public function run(): void
     {
+        $courseTypes = [
+            ['name' => "Core"],
+            ['name' => "Elective"],
+            ['name' => "Lab"],
+        ];
+
+        CourseType::insert($courseTypes);
+
         $courses = [
             [
                 'title' => 'Engineering Mathematics I',
                 'course_code' => 'MAT101',
                 'semester_id' => 1,
                 'faculty_id' => 1,
+                'course_type_id' => 1,
                 'credit' => 3
             ],
             [
@@ -27,6 +37,7 @@ class CourseSeeder extends Seeder
                 'course_code' => 'CSE102',
                 'semester_id' => 1,
                 'faculty_id' => 2,
+                'course_type_id' => 1,
                 'credit' => 3
             ],
             [
@@ -34,6 +45,7 @@ class CourseSeeder extends Seeder
                 'course_code' => 'PHY103',
                 'semester_id' => 1,
                 'faculty_id' => 3,
+                'course_type_id' => 1,
                 'credit' => 4
             ],
             [
@@ -41,6 +53,7 @@ class CourseSeeder extends Seeder
                 'course_code' => 'EEE104',
                 'semester_id' => 1,
                 'faculty_id' => 4,
+                'course_type_id' => 1,
                 'credit' => 3
             ],
             [
@@ -48,12 +61,14 @@ class CourseSeeder extends Seeder
                 'course_code' => 'CSE201',
                 'semester_id' => 1,
                 'faculty_id' => 5,
+                'course_type_id' => 1,
                 'credit' => 3
             ],
             [
                 'title' => 'Database Systems',
                 'course_code' => 'CSE202',
                 'semester_id' => 1,
+                'course_type_id' => 1,
                 'faculty_id' => 10,
                 'credit' => 3
             ],
@@ -62,12 +77,14 @@ class CourseSeeder extends Seeder
                 'course_code' => 'EEE205',
                 'semester_id' => 1,
                 'faculty_id' => 6,
+                'course_type_id' => 1,
                 'credit' => 3
             ],
             [
                 'title' => 'Software Engineering',
                 'course_code' => 'CSE301',
                 'semester_id' => 1,
+                'course_type_id' => 1,
                 'faculty_id' => 7,
                 'credit' => 3
             ],
@@ -75,6 +92,7 @@ class CourseSeeder extends Seeder
                 'title' => 'Data Structures and Algorithms',
                 'course_code' => 'CSE204',
                 'semester_id' => 1,
+                'course_type_id' => 1,
                 'faculty_id' => 8,
                 'credit' => 4
             ],
@@ -83,6 +101,7 @@ class CourseSeeder extends Seeder
                 'course_code' => 'CSE303',
                 'semester_id' => 1,
                 'faculty_id' => 9,
+                'course_type_id' => 1,
                 'credit' => 4
             ]
         ];

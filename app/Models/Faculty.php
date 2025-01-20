@@ -9,16 +9,16 @@ class Faculty extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'gender', 'phone_number', 'email', 'role_id', 'department_id'];
+    protected $fillable = ['name', 'gender', 'phone_number', 'email', 'rank_id', 'department_id'];
 
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function role()
+    public function rank()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Rank::class);
     }
 
     public function department()

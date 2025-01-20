@@ -14,14 +14,13 @@ class FacultiesExport implements FromCollection, WithMapping, WithHeadings
      */
     public function collection()
     {
-        return Faculty::select(['name', 'gender', 'phone_number', 'email', 'role_id', 'department_id'])->with(['role:id,title', 'department:id,name'])->get();
+        return Faculty::select(['name', 'phone_number', 'email', 'role_id', 'department_id'])->with(['role:id,title', 'department:id,name'])->get();
     }
 
     public function map($faculty): array
     {
         return [
             $faculty->name,
-            $faculty->gender,
             $faculty->role->title,
             $faculty->email,
             $faculty->phone_number,
@@ -31,6 +30,6 @@ class FacultiesExport implements FromCollection, WithMapping, WithHeadings
 
     public function headings(): array
     {
-        return ['Name', 'Gender', 'Role', 'Email', 'Phone Number', 'Department'];
+        return ['Name', 'Role', 'Email', 'Phone Number', 'Department'];
     }
 }

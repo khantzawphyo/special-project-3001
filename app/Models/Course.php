@@ -9,7 +9,7 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'course_code', 'credit', 'semester_id', 'program_id', 'faculty_id'];
+    protected $fillable = ['title', 'course_code', 'course_type_id', 'credit', 'semester_id', 'program_id', 'faculty_id'];
 
     public function setTitleAttribute($value)
     {
@@ -39,5 +39,10 @@ class Course extends Model
     public function program()
     {
         return $this->belongsTo(Program::class);
+    }
+
+    public function courseType()
+    {
+        return $this->belongsTo(CourseType::class);
     }
 }

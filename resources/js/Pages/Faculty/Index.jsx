@@ -74,17 +74,17 @@ export default function Index({
                                 <th scope="col" className="px-6 py-3">
                                     Name
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                {/* <th scope="col" className="px-6 py-3">
                                     Rank
-                                </th>
+                                </th> */}
                                 <th scope="col" className="px-6 py-3">
                                     Email Address
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Department
+                                    Courses
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Courses
+                                    Department
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Actions
@@ -107,30 +107,34 @@ export default function Index({
                                             alt="Jese image"
                                         />
                                         <div className="ps-3">
-                                            <div className="text-base font-semibold">
+                                            <p className="">
                                                 {faculty.name}
-                                            </div>
+                                            </p>
                                             <div className="font-normal text-gray-500">
-                                                {transformName(faculty.name)}
+                                                {/* {transformName(faculty.name)} */}
+                                                {faculty.rank.title}
                                             </div>
                                         </div>
                                     </th>
-                                    <td className="px-6 py-1.5">
+                                    {/* <td className="px-6 py-1.5">
                                         {faculty.rank.title}
-                                    </td>
+                                    </td> */}
                                     <td className="px-6 py-1.5">
                                         {faculty.email}
                                     </td>
+
                                     <td className="px-6 py-1.5">
-                                        {faculty.department.name}
+                                        {faculty.courses.map((course) => (
+                                            <span
+                                                key={course.id}
+                                                className="me-2 rounded-full bg-[#925FE2]/40 px-2.5 py-0.5 text-xs font-semibold text-[#3D2E58]"
+                                            >
+                                                {course.course_code}
+                                            </span>
+                                        ))}
                                     </td>
                                     <td className="px-6 py-1.5">
-                                        <span className="me-2 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-                                            Design
-                                        </span>
-                                        <span className="me-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800">
-                                            Design
-                                        </span>
+                                        {faculty.department.name}
                                     </td>
                                     <td className="flex justify-start gap-x-4 px-6 py-1.5">
                                         <form

@@ -271,8 +271,9 @@ export default function AuthLayout({ children }) {
                                 className="py-1 text-gray-700 dark:text-gray-300"
                                 aria-labelledby="dropdown"
                             >
-                                <li className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <li className="block w-full px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                     <Link
+                                        className="w-full text-left"
                                         method="post"
                                         as="button"
                                         href={route('logout')}

@@ -58,22 +58,22 @@ export default function Index({
                         <thead className="bg-gray-300 text-[15px] capitalize text-gray-800">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
-                                    Course Name
-                                </th>
-                                <th scope="col" className="px-6 py-3">
                                     Course Code
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Course Type
+                                    Course Name
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Instructor in Charge
+                                    Course Type
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Credit
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Program
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Instructor in Charge
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Action
@@ -86,14 +86,11 @@ export default function Index({
                                     key={course.id}
                                     className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
                                 >
-                                    <td
-                                        scope="row"
-                                        className="px-6 py-4 dark:text-white"
-                                    >
-                                        {course.title}
+                                    <td scope="row" className="px-6 py-4">
+                                        {course.course_code}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {course.course_code}
+                                        {course.title}
                                     </td>
                                     <td className="px-6 py-4">
                                         <span
@@ -114,13 +111,13 @@ export default function Index({
                                         </span>
                                     </td>
                                     <td className="px-6 py-4">
-                                        {course.faculty.name}
-                                    </td>
-                                    <td className="px-6 py-4">
                                         {course.credit}
                                     </td>
                                     <td className="px-6 py-4">
                                         {course.program.name}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {course.faculty.name}
                                     </td>
                                     <td className="flex gap-x-2 px-6 py-4">
                                         <Link

@@ -8,6 +8,8 @@ class Semester extends Model
 {
     protected $fillable = ['name'];
 
+    protected $hidden = []; // Ensure 'students' is not hidden
+
     public function students()
     {
         return $this->hasMany(Student::class);

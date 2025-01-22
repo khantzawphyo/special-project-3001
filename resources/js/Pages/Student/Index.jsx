@@ -1,12 +1,15 @@
 import FacultyDeptCard from '@/Components/FacultyDeptCard';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
+import { StudentModal } from './Partials/StudentModal';
 import studentImg from '/public/assets/user.jpg';
 
 export default function Index({ students, noOfStudent }) {
     const transformName = (name) => {
         return '@' + name.split(' ').slice(1).join('_').toLowerCase();
     };
+
+    console.log(students[0].courses);
 
     return (
         <>
@@ -65,16 +68,19 @@ export default function Index({ students, noOfStudent }) {
                                     Email Address
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Status
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Gender
-                                </th>
-                                <th scope="col" className="px-6 py-3">
                                     Major
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Courses
+                                    Status
+                                </th>
+                                {/* <th scope="col" className="px-6 py-3">
+                                    Gender
+                                </th> */}
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 text-center"
+                                >
+                                    Enrolled Courses
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Actions
@@ -97,11 +103,12 @@ export default function Index({ students, noOfStudent }) {
                                             alt="Jese image"
                                         />
                                         <div className="ps-3">
-                                            <div className="text-base font-semibold">
+                                            <div className="">
                                                 {student.name}
                                             </div>
                                             <div className="font-normal text-gray-500">
                                                 {transformName(student.name)}
+                                                {/* {student.email.split('@')[0]} */}
                                             </div>
                                         </div>
                                     </th>
@@ -110,6 +117,9 @@ export default function Index({ students, noOfStudent }) {
                                     </td>
                                     <td className="px-6 py-1.5">
                                         {student.email}
+                                    </td>
+                                    <td className="px-6 py-1.5">
+                                        {student.major.name}
                                     </td>
                                     <td className="px-6 py-1.5">
                                         <p className="flex max-w-fit items-center justify-between rounded-full bg-green-100 px-2 py-0.5 pe-2.5 text-green-800">
@@ -131,19 +141,13 @@ export default function Index({ students, noOfStudent }) {
                                             <span>{student.status}</span>
                                         </p>
                                     </td>
-                                    <td className="px-6 py-1.5">
+                                    {/* <td className="px-6 py-1.5">
                                         {student.gender}
-                                    </td>
-                                    <td className="px-6 py-1.5">
-                                        {student.major.name}
-                                    </td>
-                                    <td className="px-6 py-1.5">
-                                        <span className="me-2 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-                                            Design
-                                        </span>
-                                        <span className="me-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800">
-                                            Process
-                                        </span>
+                                    </td> */}
+                                    <td className="px-6 py-1.5 text-center">
+                                        <StudentModal
+                                            courses={student.courses}
+                                        />
                                     </td>
                                     <td className="flex justify-start gap-x-4 px-6 py-1.5">
                                         <form

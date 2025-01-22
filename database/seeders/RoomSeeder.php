@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Room;
+use App\Models\RoomType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +14,16 @@ class RoomSeeder extends Seeder
      */
     public function run(): void
     {
+        RoomType::create([
+            'type' => 'Type A',
+            'capacity' => 60
+        ]);
+
+        RoomType::create([
+            'type' => 'Type B',
+            'capacity' => 30
+        ]);
+
         for ($roomNo = 200; $roomNo <= 210; $roomNo++) {
             $roomName = 'Room ' . $roomNo;
 

@@ -21,11 +21,6 @@ class Course extends Model
         $this->attributes['course_code'] = ucwords($value);
     }
 
-    public function students()
-    {
-        return $this->belongsToMany(Student::class);
-    }
-
     public function semester()
     {
         return $this->belongsTo(Semester::class);
@@ -44,5 +39,10 @@ class Course extends Model
     public function courseType()
     {
         return $this->belongsTo(CourseType::class);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'course_student');
     }
 }

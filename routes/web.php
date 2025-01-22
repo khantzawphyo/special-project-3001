@@ -6,9 +6,12 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
+use App\Models\Course;
 use App\Models\Faculty;
+use App\Models\Semester;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,9 +38,12 @@ Route::middleware('auth')->group(function () {
     })->name('timetables.index');
 
     Route::get('new-timetable', function () {
+        $courses = Course::where('semester_id', request('semester_id'))->with(['program', 'courseType'])->get();
+        $semesters = Semester::wherein('id', [1, 3, 5, 7])->get();
 
         return Inertia::render('Timetable/NewTimetable', [
-            'faculties' => Faculty::all()
+            'semesters' => $semesters,
+            'courses' => $courses
         ]);
     })->name('timetables.add');
 });

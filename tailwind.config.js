@@ -16,6 +16,10 @@ export default {
     theme: {
         extend: {
             colors: {
+                'soft-purple': '#925FE2',
+                'primary-purple': '#302E58',
+                'main-purple': '#282336',
+                platinum: '#F4F4F5',
                 primary: {
                     50: '#eff6ff',
                     100: '#dbeafe',

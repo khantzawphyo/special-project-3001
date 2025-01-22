@@ -6,12 +6,11 @@ export default function SemesterDropdown({
     selectedSemesterName,
     semesters,
     dropdownRef,
-    semesterIdFromUrl,
 }) {
     return (
         <div className="relative w-56" ref={dropdownRef}>
             <button
-                className="inline-flex w-full items-center justify-between rounded-lg bg-[#3D2E58] px-5 py-2.5 text-center text-sm font-medium text-white"
+                className="bg-primary-purple inline-flex w-full items-center justify-between rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white"
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
@@ -45,7 +44,7 @@ export default function SemesterDropdown({
                                 <Link
                                     href={`?semester_id=${semester.id}`}
                                     className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    onClick={() => setIsDropdownOpen(false)} // Close dropdown on link click
+                                    onClick={() => setIsDropdownOpen(false)}
                                 >
                                     {semester.name}
                                 </Link>

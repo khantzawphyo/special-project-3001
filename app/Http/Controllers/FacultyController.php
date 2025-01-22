@@ -19,7 +19,7 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        $faculties = Faculty::with(['department', 'rank'])->get();
+        $faculties = Faculty::with(['department', 'rank', 'courses'])->get();
 
         // Group faculties by their role
         $rankCounts = $faculties->groupBy('rank.title')->map(function ($group) {

@@ -16,7 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::with(['major'])->get();
+        $students = Student::with(['major', 'courses'])->get();
         return Inertia::render('Student/Index', ['students' => $students, 'noOfStudent' => $students->count()]);
     }
 

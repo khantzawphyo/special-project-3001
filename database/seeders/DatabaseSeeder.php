@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             MajorSeeder::class,
             SemesterSeeder::class,
             RankSeeder::class,
-            RoomTypeSeeder::class,
             RoomSeeder::class,
             RoleSeeder::class,
             DepartmentSeeder::class,
@@ -25,6 +24,7 @@ class DatabaseSeeder extends Seeder
             FacultySeeder::class,
             ProgramSeeder::class,
             CourseSeeder::class,
+            CourseStudentSeeder::class
         ]);
     }
 }

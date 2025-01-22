@@ -21,6 +21,11 @@ class Student extends Model
         $this->attributes['password'] = bcrypt($value);
     }
 
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class);
+    }
+
     public function major()
     {
         return $this->belongsTo(Major::class);
@@ -28,6 +33,6 @@ class Student extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class, 'course_student');
     }
 }

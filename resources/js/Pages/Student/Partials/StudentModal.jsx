@@ -7,7 +7,7 @@ export function StudentModal({ courses }) {
     return (
         <>
             <button
-                className="w-full rounded-lg bg-[#925FE2] px-2 py-1.5 text-center text-sm text-white focus:outline-none sm:w-auto"
+                className="bg-primary-purple w-full rounded-lg px-2 py-1.5 text-center text-sm text-white focus:outline-none sm:w-auto"
                 onClick={() => setOpenModal(true)}
             >
                 View
@@ -28,7 +28,7 @@ export function StudentModal({ courses }) {
                         {courses.map((course) => (
                             <span
                                 key={course.id}
-                                className="me-2 rounded-full bg-[#925FE2]/40 px-2.5 py-0.5 text-xs font-semibold text-[#3D2E58]"
+                                className="bg-primary-purple/40 text-primary-purple me-2 rounded-full px-2.5 py-0.5 text-xs font-semibold"
                             >
                                 {course.course_code}
                             </span>

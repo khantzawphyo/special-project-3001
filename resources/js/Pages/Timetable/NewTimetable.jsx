@@ -44,7 +44,6 @@ export default function NewTimetable({ semesters, courses }) {
         <AuthLayout>
             <Head title="Create Exam Schedule" />
             <div className="rounded-xl border bg-white px-5 py-5 shadow-md">
-
                 {/* Semester Selection */}
                 <div className="flex items-center justify-between">
                     <p className="text-xl font-bold">Create Exam Schedule</p>

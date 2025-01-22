@@ -34,13 +34,13 @@ export default function Index({ rooms, noOfTypeA, noOfTypeB }) {
                                 <div className="flex items-center justify-between gap-x-3">
                                     <a
                                         href={route('rooms.export-excel')}
-                                        className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                                        className="bg-primary-purple w-full rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                                     >
                                         Export Excel
                                     </a>
                                     <Link
                                         href={route('rooms.create')}
-                                        className="w-full rounded-lg bg-[#925FE2] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                                        className="bg-primary-purple w-full rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                                     >
                                         Create
                                     </Link>

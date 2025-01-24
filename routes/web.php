@@ -7,6 +7,8 @@ use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
 use App\Models\Course;
+use App\Models\ExamPeriod;
+use App\Models\ExamSchedule;
 use App\Models\Faculty;
 use App\Models\Semester;
 use Illuminate\Foundation\Application;
@@ -38,14 +40,30 @@ Route::middleware('auth')->group(function () {
     })->name('timetables.index');
 
     Route::get('new-timetable', function () {
-        $courses = Course::where('semester_id', request('semester_id'))->with(['program', 'courseType'])->get();
+        $courses = Course::where('semester_id', request('semester_id'))
+            ->where('course_type_id', 1)
+            ->with(['program', 'courseType'])
+            ->get();
+        $examPeriods = ExamPeriod::all();
         $semesters = Semester::wherein('id', [1, 3, 5, 7])->get();
 
         return Inertia::render('Timetable/NewTimetable', [
             'semesters' => $semesters,
-            'courses' => $courses
+            'courses' => $courses,
+            'examPeriods' => $examPeriods,
         ]);
     })->name('timetables.add');
+
+    Route::post('new-timetable', function () {
+        // dd(request()->all());
+        foreach (request()->all() as $exam) {
+            $exam["room_id"] = fake()->numberBetween(1, 11);
+            Log::info($exam);
+            ExamSchedule::create($exam);
+        }
+
+        return redirect()->route('timetables.index');
+    })->name('timetables.store');
 });
 
 Route::get('file-upload-to-s3', function () {

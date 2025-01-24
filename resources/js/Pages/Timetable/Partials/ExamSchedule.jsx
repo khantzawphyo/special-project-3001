@@ -1,9 +1,81 @@
-export default function ExamSchedule({ courses }) {
+import { router, useForm } from '@inertiajs/react';
+
+export default function ExamSchedule({
+    courses,
+    semesterIdFromUrl,
+    examPeriods,
+}) {
+    const { data: examData, setData: setExamData } = useForm({
+        semester_id: semesterIdFromUrl,
+        exam_date: '',
+        exam_time_id: 1,
+    });
+
+    const { data: courseData, setData: setCourseData } = useForm(
+        courses.map((course) => ({
+            course_id: course.id,
+            no_students: '',
+            program_id: course.program.id,
+        })),
+    );
+
+    const handleCourseChange = (e, index) => {
+        const updatedCourseData = courseData.map((course, i) => {
+            const { name, value } = e.target;
+            console.log(name);
+            return i === index ? { ...course, [name]: value } : course;
+        });
+
+        setCourseData(updatedCourseData);
+    };
+
+    const handleExamDataChange = (e) => {
+        const { name, value } = e.target;
+        console.log(name, value);
+
+        setExamData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const calculateEndDate = () => {
+        if (!examData.exam_date) return '';
+
+        const startDate = new Date(examData.exam_date);
+        startDate.setDate(startDate.getDate() + courses.length - 1);
+        // Format as "YYYY-MM-DD"
+        return startDate.toISOString().split('T')[0];
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const updatedCourseData = courseData.map((course, index) => {
+            const examDate = new Date(examData.exam_date);
+            examDate.setDate(examDate.getDate() + index);
+
+            return {
+                ...course,
+                exam_date: examDate.toISOString().split('T')[0], // Format as "YYYY-MM-DD"
+            };
+        });
+
+        const mergedData = updatedCourseData.map((course) => ({
+            ...examData,
+            ...course,
+        }));
+
+        router.post(route('timetables.store'), mergedData, {
+            preserveState: true,
+        });
+    };
+
     return (
         <div className="mt-5 grid grid-cols-7 gap-x-4">
             <div className="col-span-2">
                 <form
-                    action=""
+                    onSubmit={handleSubmit}
                     method="post"
                     className="overflow-hidden rounded-lg border text-left text-sm text-gray-500 shadow-md rtl:text-right"
                 >
@@ -11,7 +83,7 @@ export default function ExamSchedule({ courses }) {
                         Exam Date and Time
                     </div>
                     <div className="p-4">
-                        <div className="grid gap-6 md:grid-cols-2">
+                        <div className="grid grid-cols-2 gap-6">
                             <div>
                                 <label
                                     htmlFor="first_name"
@@ -20,7 +92,10 @@ export default function ExamSchedule({ courses }) {
                                     Exam Start Date
                                 </label>
                                 <input
+                                    value={examData.exam_date}
+                                    onChange={handleExamDataChange}
                                     type="date"
+                                    name="exam_date"
                                     min="2024-12-01"
                                     max="2025-04-30"
                                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
@@ -37,23 +112,37 @@ export default function ExamSchedule({ courses }) {
                                 </label>
                                 <input
                                     type="date"
+                                    name="exam_date"
+                                    // value={examData.exam_date}
+                                    // onChange={handleExamDataChange}
+                                    value={calculateEndDate()}
+                                    disabled
                                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                     required=""
                                 />
                             </div>
                             <div>
                                 <label
-                                    htmlFor="countries"
+                                    htmlFor="exam_time_id"
                                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                                 >
                                     Exam Time ( AM / PM )
                                 </label>
                                 <select
-                                    id="exam_time"
+                                    id="exam_time_id"
+                                    name="exam_time_id"
+                                    value={examData.exam_time}
+                                    onChange={handleExamDataChange}
                                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                 >
-                                    <option value="AM">AM</option>
-                                    <option value="PM">PM</option>
+                                    {examPeriods.map((period) => (
+                                        <option
+                                            key={period.id}
+                                            value={period.id}
+                                        >
+                                            {period.type}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
@@ -88,8 +177,11 @@ export default function ExamSchedule({ courses }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {courses.map((course) => (
-                        <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+                    {courses.map((course, index) => (
+                        <tr
+                            key={course.id}
+                            className="border-b-2 border-gray-400 bg-white dark:bg-gray-800"
+                        >
                             <td
                                 scope="row"
                                 className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
@@ -129,8 +221,12 @@ export default function ExamSchedule({ courses }) {
                             >
                                 <input
                                     type="number"
+                                    name="no_students"
                                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm leading-none text-gray-900"
-                                    value="120"
+                                    onChange={(e) =>
+                                        handleCourseChange(e, index)
+                                    }
+                                    value={courseData[index].no_students}
                                     required
                                 />
                             </td>
@@ -138,7 +234,15 @@ export default function ExamSchedule({ courses }) {
                                 scope="row"
                                 className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                             >
-                                {course.program.name}
+                                <input
+                                    type="text"
+                                    name="program_id"
+                                    className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm leading-none text-gray-900"
+                                    placeholder={course.program.name}
+                                    onChange={handleCourseChange}
+                                    value={course.program.name}
+                                    disabled
+                                />
                             </td>
                         </tr>
                     ))}

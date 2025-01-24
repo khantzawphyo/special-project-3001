@@ -19,4 +19,9 @@ class Semester extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function examSchedules()
+    {
+        return $this->hasMany(ExamSchedule::class);
+    }
 }

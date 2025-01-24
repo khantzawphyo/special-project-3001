@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import ExamSchedule from './Partials/ExamSchedule';
 import SemesterDropdown from './Partials/SemesterDropdown';
 
-export default function NewTimetable({ semesters, courses }) {
+export default function NewTimetable({ semesters, courses, examPeriods }) {
     const urlParams = new URLSearchParams(window.location.search);
     const semesterIdFromUrl = urlParams.get('semester_id') || 0;
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -57,7 +57,13 @@ export default function NewTimetable({ semesters, courses }) {
                     />
                 </div>
 
-                {courses.length > 0 && <ExamSchedule courses={courses} />}
+                {courses.length > 0 && (
+                    <ExamSchedule
+                        semesterIdFromUrl={semesterIdFromUrl}
+                        examPeriods={examPeriods}
+                        courses={courses}
+                    />
+                )}
             </div>
         </AuthLayout>
     );

@@ -36,8 +36,30 @@ Route::middleware('auth')->group(function () {
     Route::resource('students', StudentController::class);
 
     Route::get('timetables', function () {
-        return Inertia::render('Timetable/Index');
+        $exams = ExamSchedule::whereIn('semester_id', [1, 3, 5, 7])
+            ->get()
+            ->groupBy('semester_id');
+        return Inertia::render('Timetable/Index', [
+            'exams' => $exams,
+        ]);
     })->name('timetables.index');
+
+    Route::get('timetables/{semId}', function ($semId) {
+        $examSchedules = ExamSchedule::where('semester_id', $semId)->get();
+
+        $courses = Course::where('semester_id', $semId)->get();
+        $mergedData = $examSchedules->map(function ($exam) use ($courses) {
+            $course = $courses->firstWhere('id', $exam->course_id);
+            return [
+                ...$exam->toArray(), // Spread exam attributes
+                ...$course->toArray(), // Spread course attributes
+            ];
+        });
+
+        return Inertia::render('Timetable/Partials/ExamTimetable', [
+            'exams' => $mergedData,
+        ]);
+    })->name('timetables.show');
 
     Route::get('new-timetable', function () {
         $courses = Course::where('semester_id', request('semester_id'))
@@ -55,10 +77,9 @@ Route::middleware('auth')->group(function () {
     })->name('timetables.add');
 
     Route::post('new-timetable', function () {
-        // dd(request()->all());
         foreach (request()->all() as $exam) {
             $exam["room_id"] = fake()->numberBetween(1, 11);
-            Log::info($exam);
+            // Log::info($exam);
             ExamSchedule::create($exam);
         }
 

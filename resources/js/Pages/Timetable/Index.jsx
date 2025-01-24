@@ -1,8 +1,8 @@
-import RoomCard from '@/Components/RoomCard';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head } from '@inertiajs/react';
+import Exams from './Exams';
 
-export default function Index({ timetables }) {
+export default function Index({ exams }) {
     return (
         <AuthLayout>
             <Head title="All Exam Timetables" />
@@ -10,9 +10,7 @@ export default function Index({ timetables }) {
                 <div className="col-span-4 h-48 rounded-3xl">
                     <p className="mb-2 text-xl font-bold">Exam Timetables</p>
                     <div className="mt-5 grid justify-between gap-x-4 md:grid-cols-3 2xl:grid-cols-3">
-                        <RoomCard name="Timetable 1" count={1} />
-                        <RoomCard name="Timetable 2" count={2} />
-                        <RoomCard name="Timetable 3" count={3} />
+                        <Exams exams={exams} />
                     </div>
                 </div>
             </div>

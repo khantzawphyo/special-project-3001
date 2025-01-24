@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Course;
 use App\Models\CourseType;
-use App\Models\Program;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -325,7 +324,7 @@ class CourseSeeder extends Seeder
                 "course_code" => "CHEM 1012",
                 "course_type_id" => 1,
                 "credit" => 4,
-                "program_id" => "CSE and ECE",
+                "program_id" => 3,
                 "faculty_id" => 1,
                 "semester_id" => 1
             ],
@@ -334,7 +333,7 @@ class CourseSeeder extends Seeder
                 "course_code" => "CHEM 1011",
                 "course_type_id" => 1,
                 "credit" => 1,
-                "program_id" => "CSE and ECE",
+                "program_id" => 3,
                 "faculty_id" => 2,
                 "semester_id" => 1
             ],
@@ -343,7 +342,7 @@ class CourseSeeder extends Seeder
                 "course_code" => "CSE 1012",
                 "course_type_id" => 1,
                 "credit" => 5,
-                "program_id" => "CSE and ECE",
+                "program_id" => 3,
                 "faculty_id" => 3,
                 "semester_id" => 1
             ],
@@ -352,7 +351,7 @@ class CourseSeeder extends Seeder
                 "course_code" => "LANG 1012",
                 "course_type_id" => 1,
                 "credit" => 2,
-                "program_id" => "CSE and ECE",
+                "program_id" => 3,
                 "faculty_id" => 4,
                 "semester_id" => 1
             ],
@@ -361,7 +360,7 @@ class CourseSeeder extends Seeder
                 "course_code" => "MATH 1012",
                 "course_type_id" => 1,
                 "credit" => 4,
-                "program_id" => "CSE and ECE",
+                "program_id" => 3,
                 "faculty_id" => 5,
                 "semester_id" => 1
             ],
@@ -370,7 +369,7 @@ class CourseSeeder extends Seeder
                 "course_code" => "PHY 1012",
                 "course_type_id" => 1,
                 "credit" => 4,
-                "program_id" => "CSE and ECE",
+                "program_id" => 3,
                 "faculty_id" => 6,
                 "semester_id" => 1
             ],
@@ -379,7 +378,7 @@ class CourseSeeder extends Seeder
                 "course_code" => "PHY 1011",
                 "course_type_id" => 1,
                 "credit" => 1,
-                "program_id" => "CSE and ECE",
+                "program_id" => 3,
                 "faculty_id" => 7,
                 "semester_id" => 1
             ],
@@ -388,7 +387,7 @@ class CourseSeeder extends Seeder
                 "course_code" => "HSS C011",
                 "course_type_id" => 1,
                 "credit" => 1,
-                "program_id" => "CSE and ECE",
+                "program_id" => 3,
                 "faculty_id" => 8,
                 "semester_id" => 1
             ]
@@ -397,6 +396,6 @@ class CourseSeeder extends Seeder
         Course::insert($sem_7);
         Course::insert($sem_5);
         Course::insert($sem_3);
-        // Course::insert($sem_1);
+        Course::insert($sem_1);
     }
 }

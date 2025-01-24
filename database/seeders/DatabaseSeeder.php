@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\ExamPeriod;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $exam_periods = [
+            [
+                "type" => "AM",
+            ],
+            [
+                "type" => "PM",
+            ]
+        ];
+        
+        ExamPeriod::insert($exam_periods);
+
         $this->call([
             MajorSeeder::class,
             SemesterSeeder::class,

@@ -149,7 +149,7 @@ export default function Login() {
                             >
                                 Sign In
                             </button>
-                            <div className="flex items-start justify-center gap-x-1 text-center">
+                            <div className=" hidden items-start justify-center gap-x-1 text-center">
                                 <span className="text-gray-600">
                                     Don't have an account?
                                 </span>

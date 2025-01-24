@@ -12,4 +12,9 @@ class ExamSchedule extends Model
     {
         return $this->belongsTo(ExamPeriod::class);
     }
+
+    public function courses()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

@@ -1,13 +1,9 @@
 import { Link } from '@inertiajs/react';
 import SideBarLink from './SideBarLink';
 
-export default function SideBar({ isSidebarOpen }) {
+export default function SideBar() {
     return (
-        <aside
-            className={`fixed left-0 top-0 z-40 h-screen w-64 border-r border-gray-200 bg-white pt-14 transition-transform duration-300 ease-in-out ${
-                isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}
-        >
+        <aside className="fixed left-0 top-0 z-40 h-screen w-64 border-r border-gray-200 bg-white pt-14 transition-transform duration-300 ease-in-out">
             <div className="h-full overflow-y-auto bg-[#282336] px-3 py-5">
                 <ul className="space-y-1 px-4 py-8 pt-10 text-center text-white">
                     <li className="mb-14">

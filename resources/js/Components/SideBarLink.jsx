@@ -1,7 +1,9 @@
+import { useSidebar } from '@/shadcn/ui/sidebar';
 import { Link, usePage } from '@inertiajs/react';
 
 export default function SideBarLink({ routeLink, icon, routeName }) {
     const { url } = usePage();
+    const { open } = useSidebar();
 
     const isActive = url.startsWith('/' + routeName.toLowerCase());
 
@@ -9,10 +11,10 @@ export default function SideBarLink({ routeLink, icon, routeName }) {
         <li>
             <Link
                 href={routeLink}
-                className={`mb-2 me-2 inline-flex w-[170px] items-center rounded-full px-5 py-2.5 text-center text-sm font-medium hover:bg-white hover:text-[#925FE2] focus:outline-none ${isActive ? 'bg-white text-[#925FE2]' : ''}`}
+                className={`mb-2 me-2 inline-flex items-center rounded-full text-center text-sm font-medium transition-all ease-in-out hover:bg-white hover:text-[#925FE2] focus:outline-none ${open ? 'w-[170px] px-5 py-2.5' : 'px-2.5 py-2.5'} ${isActive ? 'bg-white text-[#925FE2]' : ''}`}
             >
                 {icon}
-                <span className="pl-3">{routeName}</span>
+                {open && <span className="pl-3">{routeName}</span>}
             </Link>
         </li>
     );

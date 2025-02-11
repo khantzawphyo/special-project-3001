@@ -13,7 +13,6 @@ use App\Models\Faculty;
 use App\Models\Semester;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -86,24 +85,6 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('timetables.index');
     })->name('timetables.store');
 });
-
-Route::get('file-upload-to-s3', function () {
-    return view('file.upload');
-});
-
-Route::post('uploading', function (Request $request) {
-    if ($request->hasFile('myfile')) {
-        $file = $request->file('myfile')->store('testing', [
-            'disk' => 's3',
-            'visibility' => 'public'
-        ]);
-
-        Log::info('url =>' . 'https://special-project-3001.s3.ap-southeast-1.amazonaws.com/' . $file);
-        return redirect()->back()->with('url', 'https://special-project-3001.s3.ap-southeast-1.amazonaws.com/' . $file);
-    }
-
-    return redirect()->back()->with('message', 'File uploading Failed!');
-})->name('uploading');
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

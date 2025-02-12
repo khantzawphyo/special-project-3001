@@ -1,5 +1,5 @@
 import ErrorText from '@/Components/ErrorText';
-import AuthLayoutTwo from '@/Layouts/AuthLayoutTwo';
+import AuthLayoutTwo from '@/Layouts/AuthLayout';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function Create({ roomTypes }) {

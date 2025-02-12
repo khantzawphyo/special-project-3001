@@ -20,7 +20,7 @@ import {
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = '18rem';
+const SIDEBAR_WIDTH = '15rem';
 const SIDEBAR_WIDTH_MOBILE = '16rem';
 const SIDEBAR_WIDTH_ICON = '6rem';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
@@ -255,7 +255,7 @@ const SidebarTrigger = React.forwardRef(
                 data-sidebar="trigger"
                 variant="ghost"
                 size="icon"
-                className={cn('h-8 w-8 [&_svg]:size-8', className)}
+                className={cn('h-8 w-8 [&_svg]:size-10 mr-4', className)}
                 onClick={(event) => {
                     onClick?.(event);
                     toggleSidebar();

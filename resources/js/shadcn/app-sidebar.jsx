@@ -1,4 +1,3 @@
-import SideBarLink from '@/Components/SideBarLink';
 import {
     Sidebar,
     SidebarContent,
@@ -19,6 +18,7 @@ import {
     Users,
 } from 'lucide-react';
 import miitLogo from '/public/assets/miit_logo.png';
+import SideBarLink from './sidebar-link';
 
 const SideBarMenu = [
     {
@@ -94,7 +94,7 @@ export function AppSidebar({ ...props }) {
                     <li className="mb-14">
                         <Link
                             href={route('timetables.add')}
-                            className={`text-[#925FE2 mb-2 me-2 inline-flex items-center rounded-full bg-white text-center text-sm font-medium text-[#925FE2] transition-all ease-in-out hover:text-[#925FE2] focus:outline-none ${open ? 'w-[170px] px-3 py-1' : 'px-1 py-1'}`}
+                            className={`text-[#925FE2 mb-2 me-2 inline-flex items-center rounded-full bg-white text-center text-sm font-medium text-[#925FE2] transition-all ease-in-out hover:text-[#925FE2] focus:outline-none ${open ? 'w-[170px] px-3 py-1' : 'px-1 py-1 mt-4'}`}
                         >
                             <CirclePlus
                                 size={40}

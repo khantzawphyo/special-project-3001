@@ -1,6 +1,6 @@
-import FacultyDeptCard from '@/Components/FacultyDeptCard';
-import AuthLayoutTwo from '@/Layouts/AuthLayoutTwo';
+import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
+import StudentCard from './Partials/StudentCard';
 import { StudentModal } from './Partials/StudentModal';
 import studentImg from '/public/assets/user.jpg';
 
@@ -10,7 +10,7 @@ export default function Index({ students, noOfStudent }) {
     };
 
     return (
-        <AuthLayoutTwo>
+        <AuthLayout>
             <Head title="All Students" />
             <div className="mb-5">
                 <h2 className="text-2xl font-semibold">
@@ -19,17 +19,17 @@ export default function Index({ students, noOfStudent }) {
                         {noOfStudent}
                     </span>
                 </h2>
-                <div className="mt-5 grid grid-cols-2 justify-between gap-3 xl:grid-cols-4 xl:gap-x-8">
-                    <FacultyDeptCard name="BE-2019" count={120} />
-                    <FacultyDeptCard name="BE-2020" count={120} />
-                    <FacultyDeptCard name="BE-2021" count={120} />
-                    <FacultyDeptCard name="BE-2022" count={120} />
+                <div className="mt-5 grid w-full gap-y-5 gap-x-5 sm:grid-cols-2 md:gap-x-5 lg:grid-cols-4">
+                    <StudentCard name="BE-2019" count={120} />
+                    <StudentCard name="BE-2020" count={120} />
+                    <StudentCard name="BE-2021" count={120} />
+                    <StudentCard name="BE-2022" count={120} />
                 </div>
             </div>
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full bg-white text-left text-sm dark:text-gray-400 rtl:text-right">
-                    <caption className="space-x-3 bg-white px-6 py-3 text-left text-xl font-semibold">
+            <div className="relative hidden rounded-lg border shadow-md">
+                <table className="overflow-x-auto bg-white text-sm dark:text-gray-400 rtl:text-right">
+                    <caption className="space-x-3 bg-white px-6 py-3 text-xl font-semibold">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <span className="">Student Lists</span>
@@ -54,7 +54,7 @@ export default function Index({ students, noOfStudent }) {
                         </div>
                     </caption>
                     <thead className="bg-gray-300 text-[15px] capitalize text-gray-800">
-                        <tr className="border border-y-gray-200">
+                        <tr className="border border-y-gray-200 text-left">
                             <th scope="col" className="px-6 py-3">
                                 Name
                             </th>
@@ -70,9 +70,7 @@ export default function Index({ students, noOfStudent }) {
                             <th scope="col" className="px-6 py-3">
                                 Status
                             </th>
-                            {/* <th scope="col" className="px-6 py-3">
-                                    Gender
-                                </th> */}
+
                             <th scope="col" className="px-6 py-3 text-center">
                                 Enrolled Courses
                             </th>
@@ -89,7 +87,7 @@ export default function Index({ students, noOfStudent }) {
                             >
                                 <th
                                     scope="row"
-                                    className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white"
+                                    className="flex items-center whitespace-nowrap px-6 py-4 text-left text-gray-900 dark:text-white"
                                 >
                                     <img
                                         className="h-10 w-10 rounded-full"
@@ -209,6 +207,6 @@ export default function Index({ students, noOfStudent }) {
                     </tbody>
                 </table>
             </div>
-        </AuthLayoutTwo>
+        </AuthLayout>
     );
 }

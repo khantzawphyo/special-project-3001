@@ -1,6 +1,14 @@
-import AuthLayoutTwo from '@/Layouts/AuthLayoutTwo';
+import TableCaption from '@/Components/TableCaption';
+import TableHead from '@/Components/TableHead';
+import TableRow from '@/Components/TableRow';
+import TableWrapper from '@/Components/TableWrapper';
+import AuthLayout from '@/Layouts/AuthLayout';
+
 import { Head, Link, router } from '@inertiajs/react';
+import { Pencil, Trash2 } from 'lucide-react';
 import CourseCard from './Partials/CourseCard';
+import CourseModal from './Partials/CourseModal';
+import CourseType from './Partials/CourseType';
 
 export default function Index({
     courses,
@@ -9,10 +17,19 @@ export default function Index({
     noOfBothCourses,
     totalCourses,
 }) {
+    const handleCourseDelete = (e, course) => {
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete this course?')) {
+            router.delete(route('courses.destroy', course), {
+                preserveScroll: true,
+            });
+        }
+    };
+
     return (
-        <AuthLayoutTwo>
+        <AuthLayout>
             <Head title="All Courses" />
-            <div className="mb-5">
+            <div className="mb-5 mt-9">
                 <h2 className="text-2xl font-semibold">
                     Total Courses
                     <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
@@ -20,130 +37,120 @@ export default function Index({
                     </span>
                 </h2>
 
-                <div className="mt-5 grid justify-between gap-x-4 md:grid-cols-3 2xl:grid-cols-5">
+                <div className="mt-5 grid w-full gap-x-4 gap-y-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
                     <CourseCard name="CSE and ECE" count={noOfBothCourses} />
                     <CourseCard name="CSE" count={noOfCSECourses} />
                     <CourseCard name="ECE" count={noOfECECourses} />
                 </div>
             </div>
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full bg-white text-left text-sm dark:text-gray-400 rtl:text-right">
-                    <caption className="space-x-3 bg-white px-6 py-3 text-left text-xl font-semibold">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <span className="">Course Lists</span>
-                                <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800">
-                                    Courses Information
-                                </span>
-                            </div>
-                            <div className="flex items-center justify-between gap-x-3">
-                                <a
-                                    href={route('courses.export-excel')}
-                                    className="w-full rounded-lg bg-primary-purple px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
-                                >
-                                    Export Excel
-                                </a>
-                                <Link
-                                    href={route('courses.create')}
-                                    className="w-full rounded-lg bg-primary-purple px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
-                                >
-                                    Create
-                                </Link>
-                            </div>
+            <TableWrapper>
+                <table className="w-full overflow-x-auto bg-white text-left text-sm dark:text-gray-400 rtl:text-right">
+                    <TableCaption>
+                        <div className="flex items-center">
+                            <span className="">Course Lists</span>
+                            <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-800">
+                                Courses Information
+                            </span>
                         </div>
-                    </caption>
+                        <div className="flex items-center gap-x-3">
+                            <a
+                                href={route('courses.export-excel')}
+                                className="max-w-fit rounded-lg bg-primary-purple px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                            >
+                                Export Excel
+                            </a>
+                            <Link
+                                href={route('courses.create')}
+                                className="rounded-lg bg-primary-purple px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                            >
+                                Create
+                            </Link>
+                        </div>
+                    </TableCaption>
 
-                    <thead className="bg-gray-300 text-[15px] capitalize text-gray-800">
+                    <TableHead>
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 Course Code
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th
+                                scope="col"
+                                className="hidden px-6 py-3 md:table-cell"
+                            >
                                 Course Name
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th
+                                scope="col"
+                                className="hidden px-6 py-3 lg:table-cell"
+                            >
                                 Course Type
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th
+                                scope="col"
+                                className="hidden px-6 py-3 lg:table-cell"
+                            >
                                 Credit
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Program
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Instructor in Charge
+                            <th scope="col" className="hidden px-6 py-3">
+                                Instructor
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Action
                             </th>
                         </tr>
-                    </thead>
+                    </TableHead>
+
                     <tbody>
                         {courses.map((course) => (
-                            <tr
-                                key={course.id}
-                                className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
-                            >
-                                <td scope="row" className="px-6 py-4">
+                            <TableRow key={course.id}>
+                                <td className="px-6 py-4">
                                     {course.course_code}
                                 </td>
-                                <td className="px-6 py-4">{course.title}</td>
-                                <td className="px-6 py-4">
-                                    <span
-                                        className={`me-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                                            course.course_type.name === 'Core'
-                                                ? 'bg-red-100 text-red-800'
-                                                : course.course_type.name ===
-                                                    'Elective'
-                                                  ? 'bg-green-100 text-green-800'
-                                                  : course.course_type.name ===
-                                                      'Lab'
-                                                    ? 'bg-orange-100 text-orange-800'
-                                                    : ''
-                                        }`}
-                                    >
-                                        {course.course_type.name}
-                                    </span>
+                                <td className="hidden px-6 py-4 md:table-cell">
+                                    {course.title}
                                 </td>
-                                <td className="px-6 py-4">{course.credit}</td>
+                                <td className="hidden px-6 py-4 lg:table-cell">
+                                    <CourseType course={course} />
+                                </td>
+                                <td className="hidden px-6 py-4 lg:table-cell">
+                                    {course.credit}
+                                </td>
                                 <td className="px-6 py-4">
                                     {course.program.name}
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="hidden px-6 py-4">
                                     {course.faculty.name}
                                 </td>
                                 <td className="flex gap-x-2 px-6 py-4">
+                                    <CourseModal course={course} />
                                     <Link
                                         href={route('courses.edit', course)}
                                         className="font-medium text-yellow-600 hover:underline dark:text-yellow-500"
                                     >
-                                        Edit
+                                        <Pencil />
                                     </Link>
                                     <form
-                                        onSubmit={(e) => {
-                                            e.preventDefault();
-                                            router.delete(
-                                                route(
-                                                    'courses.destroy',
-                                                    course,
-                                                ),
-                                            );
-                                        }}
+                                        onSubmit={(e) =>
+                                            handleCourseDelete(e, course)
+                                        }
                                     >
                                         <button
                                             type="submit"
                                             className="font-medium text-red-600 hover:underline dark:text-red-500"
                                         >
-                                            Delete
+                                            <Trash2 />
                                         </button>
                                     </form>
                                 </td>
-                            </tr>
+                            </TableRow>
                         ))}
                     </tbody>
                 </table>
-            </div>
-        </AuthLayoutTwo>
+            </TableWrapper>
+        </AuthLayout>
     );
 }

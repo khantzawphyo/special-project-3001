@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::redirect('/', '/login');
 
-    Route::get('sign-up', [RegisteredUserController::class, 'create'])
-        ->name('sign-up');
+    Route::get('register', [RegisteredUserController::class, 'create'])
+        ->name('register');
 
-    Route::post('sign-up', [RegisteredUserController::class, 'store']);
+    Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');

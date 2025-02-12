@@ -1,4 +1,4 @@
-import AuthLayoutTwo from '@/Layouts/AuthLayoutTwo';
+import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import FacultyCard from './Partials/FacultyCard';
 import facultyImg from '/public/assets/user.jpg';
@@ -16,7 +16,7 @@ export default function Index({
     };
 
     return (
-        <AuthLayoutTwo>
+        <AuthLayout>
             <Head title="All Faculties" />
             <div className="mb-5">
                 <h2 className="text-2xl font-semibold">
@@ -200,6 +200,6 @@ export default function Index({
                     </tbody>
                 </table>
             </div>
-        </AuthLayoutTwo>
+        </AuthLayout>
     );
 }

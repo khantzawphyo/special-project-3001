@@ -1,8 +1,9 @@
-import AuthLayoutTwo from '@/Layouts/AuthLayoutTwo';
+import AuthLayoutTwo from '@/Layouts/AuthLayout';
 import { Head, Link, usePage } from '@inertiajs/react';
 import UpdateInfo from './Partials/UpdateInfo';
 import UpdatePassword from './Partials/UpdatePassword';
 import adminImg from '/public/assets/admin2.jpg';
+import AuthLayout from '@/Layouts/AuthLayout';
 
 export default function Index() {
     const {
@@ -10,7 +11,7 @@ export default function Index() {
     } = usePage().props;
 
     return (
-        <AuthLayoutTwo>
+        <AuthLayout>
             <Head title="Settings" />
             <div className="rounded-2xl bg-white p-8 pt-10">
                 <div className="flex items-center justify-between border-b-2 border-gray-200 pb-4">
@@ -86,6 +87,6 @@ export default function Index() {
                     </div>
                 </div>
             </div>
-        </AuthLayoutTwo>
+        </AuthLayout>
     );
 }

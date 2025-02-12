@@ -1,9 +1,10 @@
 import { Head } from '@inertiajs/react';
 import Exams from './Exams';
+import AuthLayout from '@/Layouts/AuthLayout';
 
 export default function Index({ exams }) {
     return (
-        <AuthLayoutTwo>
+        <AuthLayout>
             <Head title="All Exam Timetables" />
             <div className="mb-4 grid grid-cols-6 gap-8 rounded-3xl">
                 <div className="col-span-4 h-48 rounded-3xl">
@@ -13,6 +14,6 @@ export default function Index({ exams }) {
                     </div>
                 </div>
             </div>
-        </AuthLayoutTwo>
+        </AuthLayout>
     );
 }

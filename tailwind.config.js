@@ -1,5 +1,4 @@
 import forms from '@tailwindcss/forms';
-import flowbite from 'flowbite-react/tailwind';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -10,7 +9,6 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.jsx',
-        flowbite.content(),
     ],
 
     theme: {
@@ -128,5 +126,5 @@ export default {
         },
     },
 
-    plugins: [forms, flowbite.plugin(), require('tailwindcss-animate')],
+    plugins: [forms, require('tailwindcss-animate')],
 };

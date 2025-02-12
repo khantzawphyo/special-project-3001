@@ -20,6 +20,7 @@ class FacultyController extends Controller
     public function index()
     {
         $faculties = Faculty::with(['department', 'rank', 'courses'])->get();
+        $paginatedFaculties = Faculty::with(['department', 'rank', 'courses'])->paginate(10);
 
         // Group faculties by their role
         $rankCounts = $faculties->groupBy('rank.title')->map(function ($group) {
@@ -33,7 +34,7 @@ class FacultyController extends Controller
         $noOfAssistLect = $rankCounts->get('Assistant Lecturer', 0);
 
         return Inertia::render('Faculty/Index', [
-            'faculties' => $faculties,
+            'faculties' => $paginatedFaculties,
             'noOfFaculty' => $faculties->count(),
             'noOfProfessor' => $noOfProfessor,
             'noOfAssistProf' => $noOfAssistProf,
@@ -96,7 +97,7 @@ class FacultyController extends Controller
     public function update(UpdateFacultyRequest $request, Faculty $faculty)
     {
         $faculty->update($request->validated());
-        return redirect()->route('faculties.index');
+        return redirect()->back();
     }
 
     /**
@@ -105,6 +106,6 @@ class FacultyController extends Controller
     public function destroy(Faculty $faculty)
     {
         $faculty->delete();
-        return redirect()->route('faculties.index');
+        return redirect()->back();
     }
 }

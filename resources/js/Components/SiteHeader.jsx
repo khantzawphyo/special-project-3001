@@ -12,21 +12,37 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/shadcn/ui/dropdown-menu';
+import { useEffect, useState } from 'react';
 
 export default function SiteHeader({ title }) {
     const {
         url,
         auth: { user },
     } = usePage().props;
+    const [isBlurred, setIsBlurred] = useState(false);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsBlurred(window.scrollY > 20);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     /* 
     these two properties will mess up header component
     transition-[width,height] group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12
     */
-    
+
     return (
-        <header className="sticky top-0 z-50 flex shrink-0 items-center gap-2 bg-platinum pt-8 ease-linear dark:bg-[#282336] dark:shadow-md">
-            <div className="flex w-full items-center justify-between gap-2 px-4 pb-4">
+        <header
+            className={`sticky top-0 z-50 flex items-center gap-2 bg-platinum transition-colors ease-in-out dark:bg-[#282336] ${
+                isBlurred
+                    ? 'bg-platinum/10 shadow-md backdrop-blur-lg dark:bg-[#282336]/20'
+                    : 'shadow-none backdrop-blur-none'
+            }`}
+        >
+            <div className="flex w-full items-center justify-between gap-2 px-4 pb-4 pt-6">
                 <div className="flex items-center">
                     <SidebarTrigger className="-ml-1 hover:bg-none dark:text-white" />
                     <ModeToggle />

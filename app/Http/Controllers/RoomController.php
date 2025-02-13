@@ -17,11 +17,11 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::with(['roomType'])->get();
         $noOfTypeA = Room::where('room_type_id', 1)->count();
         $noOfTypeB = Room::where('room_type_id', 2)->count();
+        $filteredRooms = Room::filter(request(['room_type']))->with(['roomType'])->paginate(8)->withQueryString();
 
-        return Inertia::render('Room/Index', ['rooms' => $rooms, 'noOfTypeA' => $noOfTypeA, 'noOfTypeB' => $noOfTypeB]);
+        return Inertia::render('Room/Index', ['rooms' => $filteredRooms, 'noOfTypeA' => $noOfTypeA, 'noOfTypeB' => $noOfTypeB]);
     }
 
     public function exportExcel()
@@ -45,7 +45,7 @@ class RoomController extends Controller
     public function store(RoomRequest $request)
     {
         Room::create($request->validated());
-        return redirect()->route('rooms.index');
+        return redirect()->back();
     }
 
     /**
@@ -72,7 +72,7 @@ class RoomController extends Controller
     public function update(RoomRequest $request, Room $room)
     {
         $room->update($request->validated());
-        return redirect()->route('rooms.index');
+        return redirect()->back();
     }
 
     /**
@@ -81,6 +81,6 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         $room->delete();
-        return redirect()->route('rooms.index');
+        return redirect()->back();
     }
 }

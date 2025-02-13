@@ -11,6 +11,15 @@ class Faculty extends Model
 
     protected $fillable = ['name', 'gender', 'phone_number', 'email', 'rank_id', 'department_id'];
 
+    public function scopeFilter($query, $filter)
+    {
+        $query->when($filter['rank'] ?? false, function ($query, $name) {
+            $query->whereHas('rank', function ($query) use ($name) {
+                $query->where('title', $name);
+            });
+        });
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);

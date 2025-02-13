@@ -24,7 +24,7 @@ class RoomSeeder extends Seeder
             'capacity' => 30
         ]);
 
-        for ($roomNo = 200; $roomNo <= 210; $roomNo++) {
+        for ($roomNo = 200; $roomNo <= 220; $roomNo++) {
             $roomName = 'Room ' . $roomNo;
 
             Room::create([

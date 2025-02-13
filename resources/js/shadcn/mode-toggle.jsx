@@ -4,7 +4,7 @@ import { useTheme } from '@/shadcn/theme-provider';
 import { Button } from '@/shadcn/ui/button';
 import { useEffect, useState } from 'react';
 
-export default function ModeToggle() {
+export default function ModeToggle({ className }) {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
@@ -15,7 +15,9 @@ export default function ModeToggle() {
     return (
         <>
             {mounted && (
-                <div className="hidden space-x-2 rounded-full border border-gray-300 px-2 sm:flex">
+                <div
+                    className={`hidden space-x-2 rounded-full border border-gray-300 px-2 sm:flex ${className}`}
+                >
                     <Button
                         variant="ghost"
                         size="icon"

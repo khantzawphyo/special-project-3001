@@ -18,6 +18,8 @@ class CourseController extends Controller
     {
         $courses = Course::with(['program', 'faculty', 'courseType'])->get();
 
+        $filteredCourses = Course::filter(request(['program']))->with(['program', 'faculty', 'courseType'])->paginate(10)->withQueryString();
+
         // Group courses by their program
         $roleCounts = $courses->groupBy('program.name')->map(function ($group) {
             return $group->count();
@@ -29,7 +31,7 @@ class CourseController extends Controller
         $noOfBoth = $roleCounts->get('CSE and ECE', 0);
 
         return Inertia::render('Course/Index', [
-            'courses' => $courses,
+            'courses' => $filteredCourses,
             'noOfCSECourses' => $noOfCSE,
             'noOfECECourses' => $noOfECE,
             'noOfBothCourses' => $noOfBoth,

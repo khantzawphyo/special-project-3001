@@ -11,6 +11,15 @@ class Course extends Model
 
     protected $fillable = ['title', 'course_code', 'course_type_id', 'credit', 'semester_id', 'program_id', 'faculty_id'];
 
+    public function scopeFilter($query, $filter)
+    {
+        $query->when($filter['program'] ?? false, function ($query, $name) {
+            $query->whereHas('program', function ($query) use ($name) {
+                $query->where('name', strtoupper($name));
+            });
+        });
+    }
+    
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = ucwords($value);

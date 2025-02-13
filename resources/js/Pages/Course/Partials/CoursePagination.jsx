@@ -1,16 +1,18 @@
 import {
     Pagination,
     PaginationContent,
+    PaginationEllipsis,
     PaginationItem,
+    PaginationLink,
     PaginationNext,
     PaginationPrevious,
 } from '@/shadcn/ui/pagination';
 
-export default function FacultyPagination({ faculties }) {
-    const { current_page, last_page, links } = faculties;
+export default function CoursePagination({ courses }) {
+    const { current_page, last_page, links } = courses;
 
     return (
-        <Pagination className="py-2 dark:bg-main-purple">
+        <Pagination className="dark:bg-main-purple py-2">
             <PaginationContent>
                 {/* Previous Button */}
                 <PaginationItem className="max-w-fit rounded-lg bg-primary-purple text-center text-sm font-medium text-white focus:outline-none sm:w-auto">

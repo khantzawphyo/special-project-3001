@@ -11,7 +11,7 @@ import { Eye } from 'lucide-react';
 export default function FacultyModal({ faculty }) {
     return (
         <Dialog>
-            <DialogTrigger className="inline-block lg:hidden" asChild>
+            <DialogTrigger className="inline-block xl:hidden" asChild>
                 <Eye className="text-green-500" />
             </DialogTrigger>
             <DialogContent className="rounded-lg p-5 shadow-md dark:bg-main-purple dark:text-white">
@@ -56,7 +56,7 @@ export default function FacultyModal({ faculty }) {
                     <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">
                         Courses
                     </p>
-                    {faculty.courses.lenght > 0 ? (
+                    {faculty.courses.length > 0 ? (
                         faculty.courses.map((course) => (
                             <Badge className="rounded-full" key={course.id}>
                                 {course.course_code}

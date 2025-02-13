@@ -1,6 +1,6 @@
 import { Separator } from '@/shadcn/ui/separator';
 import { SidebarTrigger } from '@/shadcn/ui/sidebar';
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import facultyImg from '/public/assets/admin2.jpg';
 
 import ModeToggle from '@/shadcn/mode-toggle';
@@ -69,8 +69,12 @@ export default function SiteHeader({ title }) {
                     <DropdownMenuContent className="mr-5 mt-2 w-44 bg-white dark:bg-main-purple md:ml-8 md:mr-0">
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Settings</DropdownMenuItem>
-                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <Link href="/settings">Settings</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <a href="/logout">Logout</a>
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>

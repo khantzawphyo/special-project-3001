@@ -6,8 +6,8 @@ import {
     PaginationPrevious,
 } from '@/shadcn/ui/pagination';
 
-export default function FacultyPagination({ faculties }) {
-    const { current_page, last_page, links } = faculties;
+export default function RoomPagination({ rooms }) {
+    const { current_page, last_page, links } = rooms;
 
     return (
         <Pagination className="py-2 dark:bg-main-purple">

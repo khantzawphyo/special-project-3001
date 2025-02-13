@@ -8,6 +8,7 @@ import { Head, Link, router } from '@inertiajs/react';
 import { Pencil, Trash2 } from 'lucide-react';
 import CourseCard from './Partials/CourseCard';
 import CourseModal from './Partials/CourseModal';
+import CoursePagination from './Partials/CoursePagination';
 import CourseType from './Partials/CourseType';
 
 export default function Index({
@@ -30,17 +31,31 @@ export default function Index({
         <AuthLayout>
             <Head title="All Courses" />
             <div className="mb-5 mt-9">
-                <h2 className="text-2xl font-semibold">
-                    Total Courses
-                    <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
-                        {totalCourses}
-                    </span>
+                <h2 className="text-2xl font-semibold hover:underline">
+                    <Link href="/courses">
+                        Total Courses
+                        <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
+                            {totalCourses}
+                        </span>
+                    </Link>
                 </h2>
 
-                <div className="mt-5 grid w-full gap-x-4 gap-y-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
-                    <CourseCard name="CSE and ECE" count={noOfBothCourses} />
-                    <CourseCard name="CSE" count={noOfCSECourses} />
-                    <CourseCard name="ECE" count={noOfECECourses} />
+                <div className="mt-5 grid w-full gap-x-4 gap-y-4 sm:grid-cols-2 md:grid-cols-2 md:gap-x-7 lg:grid-cols-3 2xl:grid-cols-5 xl:gap-x-10">
+                    <CourseCard
+                        url="?program=cse and ece"
+                        name="CSE and ECE"
+                        count={noOfBothCourses}
+                    />
+                    <CourseCard
+                        url="?program=cse"
+                        name="CSE"
+                        count={noOfCSECourses}
+                    />
+                    <CourseCard
+                        url="?program=ece"
+                        name="ECE"
+                        count={noOfECECourses}
+                    />
                 </div>
             </div>
 
@@ -92,7 +107,7 @@ export default function Index({
                             >
                                 Credit
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="hidden sm:table-cell px-6 py-3">
                                 Program
                             </th>
                             <th scope="col" className="hidden px-6 py-3">
@@ -105,7 +120,7 @@ export default function Index({
                     </TableHead>
 
                     <tbody>
-                        {courses.map((course) => (
+                        {courses.data.map((course) => (
                             <TableRow key={course.id}>
                                 <td className="px-6 py-4">
                                     {course.course_code}
@@ -119,7 +134,7 @@ export default function Index({
                                 <td className="hidden px-6 py-4 lg:table-cell">
                                     {course.credit}
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-4 hidden sm:table-cell">
                                     {course.program.name}
                                 </td>
                                 <td className="hidden px-6 py-4">
@@ -150,6 +165,9 @@ export default function Index({
                         ))}
                     </tbody>
                 </table>
+                {courses.data.length >= 10 && (
+                    <CoursePagination courses={courses} />
+                )}
             </TableWrapper>
         </AuthLayout>
     );

@@ -13,7 +13,7 @@ export default function Index() {
     return (
         <AuthLayout>
             <Head title="Settings" />
-            <div className="rounded-2xl bg-white p-8 pt-10">
+            <div className="rounded-2xl mt-12 dark:bg-main-purple bg-white p-8 pt-10">
                 <div className="flex items-center justify-between border-b-2 border-gray-200 pb-4">
                     <h3 className="text-2xl font-semibold">My Profile</h3>
                     <Link
@@ -21,7 +21,7 @@ export default function Index() {
                         method="post"
                         className="w-full rounded-lg bg-[#3D2E58] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                     >
-                        Sign Out
+                        Logout
                     </Link>
                 </div>
 

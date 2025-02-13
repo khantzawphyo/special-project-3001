@@ -36,21 +36,33 @@ export default function Index({
         <AuthLayout>
             <Head title="All Faculties" />
             <div className="mb-5 mt-10">
-                <h2 className="text-2xl font-semibold">
-                    Total Faculties
-                    <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
-                        {noOfFaculty}
-                    </span>
+                <h2 className="text-2xl font-semibold hover:underline">
+                    <Link href="/faculties">
+                        Total Faculties
+                        <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
+                            {noOfFaculty}
+                        </span>
+                    </Link>
                 </h2>
-                <div className="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-                    <FacultyCard name="Professor" count={noOfProfessor} />
+                <div className="mt-5 grid gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-5 xl:grid-cols-4 xl:gap-x-10">
                     <FacultyCard
+                        url="?rank=Professor"
+                        name="Professor"
+                        count={noOfProfessor}
+                    />
+                    <FacultyCard
+                        url="?rank=Associate Professor"
                         name="Associate Professor"
                         count={noOfAssistProf}
                     />
-                    <FacultyCard name="Lecturer" count={noOfLecturer} />
                     <FacultyCard
-                        name="Assistant Lecture"
+                        url="?rank=Lecturer"
+                        name="Lecturer"
+                        count={noOfLecturer}
+                    />
+                    <FacultyCard
+                        url="?rank=Assistant Lecturer"
+                        name="Assistant Lecturer"
                         count={noOfAssistLect}
                     />
                 </div>
@@ -149,7 +161,7 @@ export default function Index({
                                             </Badge>
                                         ))
                                     ) : (
-                                        <Badge className="rounded-full">
+                                        <Badge className="rounded-full bg-[#925FE2]/40 px-2.5 py-0.5 text-xs font-semibold text-[#3D2E58]">
                                             N/A
                                         </Badge>
                                     )}

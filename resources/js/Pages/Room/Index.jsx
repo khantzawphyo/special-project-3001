@@ -4,23 +4,42 @@ import TableRow from '@/Components/TableRow';
 import TableWrapper from '@/Components/TableWrapper';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
+import { Pencil, Trash2 } from 'lucide-react';
 import RoomCard from './Partials/RoomCard';
+import RoomPagination from './Partials/RoomPagination';
 
 export default function Index({ rooms, noOfTypeA, noOfTypeB }) {
+    const handleRoomDelete = (e, room) => {
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete?')) {
+            router.delete(route('rooms.destroy', room));
+        }
+    };
+
     return (
         <AuthLayout>
             <Head title="All Rooms" />
             <div className="mb-5 mt-10">
-                <h2 className="text-xl font-semibold md:text-2xl">
-                    Total Rooms
-                    <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
-                        {noOfTypeA + noOfTypeB}
-                    </span>
+                <h2 className="text-xl font-semibold hover:underline md:text-2xl">
+                    <Link href="/rooms">
+                        Total Rooms
+                        <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
+                            {noOfTypeA + noOfTypeB}
+                        </span>
+                    </Link>
                 </h2>
 
                 <div className="mt-5 grid gap-x-4 gap-y-3 md:grid-cols-3 2xl:grid-cols-5">
-                    <RoomCard name="Type A" count={noOfTypeA} />
-                    <RoomCard name="Type B" count={noOfTypeB} />
+                    <RoomCard
+                        url="?room_type=Type A"
+                        name="Type A"
+                        count={noOfTypeA}
+                    />
+                    <RoomCard
+                        url="?room_type=Type B"
+                        name="Type B"
+                        count={noOfTypeB}
+                    />
                 </div>
             </div>
 
@@ -70,7 +89,7 @@ export default function Index({ rooms, noOfTypeA, noOfTypeB }) {
                     </TableHead>
 
                     <tbody>
-                        {rooms.map((room) => (
+                        {rooms.data.map((room) => (
                             <TableRow key={room.id}>
                                 <td className="px-6 py-1.5">{room.name}</td>
                                 <td className="hidden px-6 py-1.5 sm:block">
@@ -80,73 +99,30 @@ export default function Index({ rooms, noOfTypeA, noOfTypeB }) {
                                     {room.room_type.capacity}
                                 </td>
                                 <td className="flex justify-start gap-x-4 px-6 py-1.5">
+                                    <Link
+                                        href={route('rooms.edit', room)}
+                                        className="font-medium text-yellow-600 hover:underline dark:text-yellow-500"
+                                    >
+                                        <Pencil />
+                                    </Link>
                                     <form
-                                        onSubmit={(e) => {
-                                            e.preventDefault();
-                                            router.delete(
-                                                route('rooms.destroy', room),
-                                            );
-                                        }}
+                                        onSubmit={(e) =>
+                                            handleRoomDelete(e, room)
+                                        }
                                     >
                                         <button
                                             type="submit"
                                             className="font-medium text-red-600 hover:underline dark:text-red-500"
                                         >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width={24}
-                                                height={24}
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth={2}
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                className="icon icon-tabler icons-tabler-outline icon-tabler-trash"
-                                            >
-                                                <path
-                                                    stroke="none"
-                                                    d="M0 0h24v24H0z"
-                                                    fill="none"
-                                                />
-                                                <path d="M4 7l16 0" />
-                                                <path d="M10 11l0 6" />
-                                                <path d="M14 11l0 6" />
-                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                            </svg>
+                                            <Trash2 />
                                         </button>
                                     </form>
-                                    <Link
-                                        href={route('rooms.edit', room)}
-                                        className="font-medium text-yellow-600 hover:underline dark:text-yellow-500"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width={24}
-                                            height={24}
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={2}
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            className="icon icon-tabler icons-tabler-outline icon-tabler-pencil"
-                                        >
-                                            <path
-                                                stroke="none"
-                                                d="M0 0h24v24H0z"
-                                                fill="none"
-                                            />
-                                            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-                                            <path d="M13.5 6.5l4 4" />
-                                        </svg>
-                                    </Link>
                                 </td>
                             </TableRow>
                         ))}
                     </tbody>
                 </table>
+                <RoomPagination rooms={rooms} />
             </TableWrapper>
         </AuthLayout>
     );

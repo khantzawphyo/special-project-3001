@@ -16,6 +16,8 @@ import FacultyCard from './Partials/FacultyCard';
 import FacultyModal from './Partials/FacultyModal';
 import FacultyPagination from './Partials/FacultyPagination';
 import facultyImg from '/public/assets/user.jpg';
+import ScrollIndicator from '@/Components/ScrollIndicator';
+import { useSidebar } from '@/shadcn/ui/sidebar';
 
 export default function Index({
     faculties = [],
@@ -35,6 +37,7 @@ export default function Index({
     return (
         <AuthLayout>
             <Head title="All Faculties" />
+            <ScrollIndicator />
             <div className="mb-5 mt-10">
                 <h2 className="text-2xl font-semibold hover:underline">
                     <Link href="/faculties">

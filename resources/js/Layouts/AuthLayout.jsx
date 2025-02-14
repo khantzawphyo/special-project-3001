@@ -12,7 +12,7 @@ export default function AuthLayout({ children }) {
                 <AppSidebar />
                 <SidebarInset className="">
                     <SiteHeader />
-                    <main className="flex flex-1 flex-col gap-4 bg-platinum p-4 pt-0 transition-all dark:bg-main-purple/80 dark:text-white">
+                    <main className="flex flex-1 flex-col gap-4 bg-platinum px-5 xl:px-10 pb-10 transition-all dark:bg-main-purple/80 dark:text-white">
                         {children}
                     </main>
                 </SidebarInset>

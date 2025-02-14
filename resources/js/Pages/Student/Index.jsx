@@ -7,15 +7,18 @@ import TableHead from '@/Components/TableHead';
 import TableRow from '@/Components/TableRow';
 import TableWrapper from '@/Components/TableWrapper';
 import { Badge } from '@/shadcn/ui/badge';
-import { Dot, Ellipsis, Eye, Pencil, Trash2 } from 'lucide-react';
+import { Dot, Ellipsis, Pencil, Trash2 } from 'lucide-react';
 import studentImg from '/public/assets/user.jpg';
 
+import ScrollIndicator from '@/Components/ScrollIndicator';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/shadcn/ui/dropdown-menu';
+import StudentModal from './Partials/StudentModal';
+import StudentPagination from './Partials/StudentPagination';
 
 export default function Index({ students, noOfStudent }) {
     const transformName = (name) => {
@@ -32,14 +35,17 @@ export default function Index({ students, noOfStudent }) {
     return (
         <AuthLayout>
             <Head title="All Students" />
+            <ScrollIndicator />
             <div className="mb-5 mt-10">
-                <h2 className="text-2xl font-semibold">
-                    Total Students
-                    <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
-                        {noOfStudent}
-                    </span>
+                <h2 className="text-2xl font-semibold hover:underline">
+                    <Link href="/students">
+                        Total Students
+                        <span className="ms-2 rounded-full bg-blue-100 px-2.5 py-1 text-base font-medium text-blue-800">
+                            {noOfStudent}
+                        </span>
+                    </Link>
                 </h2>
-                <div className="mdhidden mt-5 grid w-full gap-x-5 gap-y-5 sm:grid-cols-2 md:gap-x-5 lg:grid-cols-4">
+                <div className="mdhidden mt-5 grid w-full gap-x-5 gap-y-5 sm:grid-cols-2 md:gap-x-5 lg:grid-cols-4 lg:gap-x-8">
                     <StudentCard name="BE-2019" count={120} />
                     <StudentCard name="BE-2020" count={120} />
                     <StudentCard name="BE-2021" count={120} />
@@ -79,7 +85,7 @@ export default function Index({ students, noOfStudent }) {
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-6 py-3 sm:table-cell md:hidden lg:table-cell"
+                                className="hidden px-6 py-3 sm:table-cell md:hidden xl:table-cell"
                             >
                                 Roll Number
                             </th>
@@ -101,20 +107,18 @@ export default function Index({ students, noOfStudent }) {
                             >
                                 Status
                             </th>
+
                             <th
                                 scope="col"
-                                className="hidden px-6 py-3 text-center xl:table-cell"
+                                className="px-5 py-3 sm:px-6 md:px-10"
                             >
-                                Enrolled Courses
-                            </th>
-                            <th scope="col" className="px-10 py-3 sm:px-6">
                                 Actions
                             </th>
                         </tr>
                     </TableHead>
 
                     <tbody>
-                        {students.map((student) => (
+                        {students.data.map((student) => (
                             <TableRow
                                 key={student.id}
                                 className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -138,13 +142,13 @@ export default function Index({ students, noOfStudent }) {
                                         </p>
                                     </div>
                                 </th>
-                                <td className="hidden px-6 py-1.5 uppercase sm:table-cell md:hidden lg:table-cell">
+                                <td className="hidden px-6 py-1.5 uppercase sm:table-cell md:hidden xl:table-cell">
                                     {student.email.split('@')[0]}
                                 </td>
                                 <td className="hidden px-6 py-1.5 md:table-cell">
                                     {student.email}
                                 </td>
-                                <td className="py-1.5 md:hidden md:px-6 lg:table-cell">
+                                <td className="px-3 py-1.5 md:hidden md:px-6 lg:table-cell">
                                     {student.major.name}
                                 </td>
                                 <td className="hidden px-6 py-1.5 lg:table-cell">
@@ -153,11 +157,7 @@ export default function Index({ students, noOfStudent }) {
                                         <span>{student.status}</span>
                                     </Badge>
                                 </td>
-                                <td className="hidden px-6 py-1.5 text-center xl:table-cell">
-                                    View
-                                    {/* <StudentModal courses={student.courses} /> */}
-                                </td>
-                                <td className="px-12 sm:hidden">
+                                <td className="ps-8 sm:hidden">
                                     <DropdownMenu>
                                         <DropdownMenuTrigger
                                             asChild
@@ -180,8 +180,8 @@ export default function Index({ students, noOfStudent }) {
                                         </DropdownMenuContent>
                                     </DropdownMenu>
                                 </td>
-                                <td className="sm:tabel-cell hidden place-items-center gap-x-2 px-6 py-1.5 sm:flex">
-                                    <Eye className="text-green-500 lg:hidden" />
+                                <td className="sm:tabel-cell absolute mt-5 hidden place-items-center gap-x-2 sm:flex xl:ps-10">
+                                    <StudentModal student={student} />
                                     <Link
                                         href={route('students.edit', student)}
                                         className="font-medium text-yellow-600 hover:underline dark:text-yellow-500"
@@ -205,6 +205,7 @@ export default function Index({ students, noOfStudent }) {
                         ))}
                     </tbody>
                 </table>
+                <StudentPagination students={students} />
             </TableWrapper>
         </AuthLayout>
     );

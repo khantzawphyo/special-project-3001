@@ -2,6 +2,7 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import RoomCard from './Room/Partials/RoomCard';
 
 import OverviewCard from '@/Components/OverviewCard';
+import ScrollIndicator from '@/Components/ScrollIndicator';
 import AuthLayout from '@/Layouts/AuthLayout';
 import StudentImg from '/public/assets/dashboard/student.png';
 
@@ -15,8 +16,6 @@ export default function Dashboard({
     const {
         auth: { user },
     } = usePage().props;
-    // const obj = useSidebar();
-    // console.log(obj);
 
     const OverviewItems = [
         {
@@ -42,6 +41,7 @@ export default function Dashboard({
     return (
         <AuthLayout>
             <Head title="Dashboard" />
+            <ScrollIndicator />
             <div className="mt-10 grid grid-cols-1 items-center rounded-3xl bg-gradient-to-l from-[#6D5394] to-[#3B2C55] p-8 pt-10 text-white lg:grid-cols-3 lg:pe-10 lg:ps-16">
                 <div className="col-span-2 space-y-12">
                     <p className="font-semibold">{currentDate}</p>
@@ -57,7 +57,7 @@ export default function Dashboard({
                         <p>
                             <Link
                                 href={route('timetables.add')}
-                                className="rounded-lg bg-main-purple px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
+                                className="rounded-full bg-platinum px-5 py-3 text-center text-sm font-medium text-black hover:bg-platinum/80 focus:outline-none dark:bg-main-purple dark:text-white dark:hover:bg-main-purple/70 sm:w-auto"
                             >
                                 Get Started
                             </Link>

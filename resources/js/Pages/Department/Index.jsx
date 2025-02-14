@@ -5,7 +5,7 @@ import TableWrapper from '@/Components/TableWrapper';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { Pencil, Trash2 } from 'lucide-react';
-import RoomCard from '../Room/Partials/RoomCard';
+import DepartmentCard from './Partials/DepartmentCard';
 
 export default function Index({ departments, noOfDepartments }) {
     const handleDeptDelete = (e, department) => {
@@ -24,10 +24,10 @@ export default function Index({ departments, noOfDepartments }) {
                     </span>
                 </h2>
                 <div className="mt-5 hidden grid-cols-4 justify-between gap-x-8">
-                    <RoomCard name="Computer Science" count={10} />
-                    <RoomCard name="Computing" count={3} />
-                    <RoomCard name="Information Science" count={6} />
-                    <RoomCard name="Technology Science" count={5} />
+                    <DepartmentCard name="Computer Science" count={10} />
+                    <DepartmentCard name="Computing" count={3} />
+                    <DepartmentCard name="Information Science" count={6} />
+                    <DepartmentCard name="Technology Science" count={5} />
                 </div>
             </div>
 
@@ -81,6 +81,15 @@ export default function Index({ departments, noOfDepartments }) {
                                 </td>
 
                                 <td className="flex justify-start gap-x-4 px-6 py-1.5">
+                                    <Link
+                                        href={route(
+                                            'departments.edit',
+                                            department,
+                                        )}
+                                        className="font-medium text-yellow-600 hover:underline dark:text-yellow-500"
+                                    >
+                                        <Pencil />
+                                    </Link>
                                     <form
                                         onSubmit={(e) =>
                                             handleDeptDelete(
@@ -96,15 +105,6 @@ export default function Index({ departments, noOfDepartments }) {
                                             <Trash2 />
                                         </button>
                                     </form>
-                                    <Link
-                                        href={route(
-                                            'departments.edit',
-                                            department,
-                                        )}
-                                        className="font-medium text-yellow-600 hover:underline dark:text-yellow-500"
-                                    >
-                                        <Pencil />
-                                    </Link>
                                 </td>
                             </TableRow>
                         ))}

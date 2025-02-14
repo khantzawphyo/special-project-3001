@@ -10,6 +10,7 @@ import CourseCard from './Partials/CourseCard';
 import CourseModal from './Partials/CourseModal';
 import CoursePagination from './Partials/CoursePagination';
 import CourseType from './Partials/CourseType';
+import ScrollIndicator from '@/Components/ScrollIndicator';
 
 export default function Index({
     courses,
@@ -30,6 +31,7 @@ export default function Index({
     return (
         <AuthLayout>
             <Head title="All Courses" />
+            <ScrollIndicator />
             <div className="mb-5 mt-9">
                 <h2 className="text-2xl font-semibold hover:underline">
                     <Link href="/courses">
@@ -40,7 +42,7 @@ export default function Index({
                     </Link>
                 </h2>
 
-                <div className="mt-5 grid w-full gap-x-4 gap-y-4 sm:grid-cols-2 md:grid-cols-2 md:gap-x-7 lg:grid-cols-3 2xl:grid-cols-5 xl:gap-x-10">
+                <div className="mt-5 grid w-full gap-x-4 gap-y-4 sm:grid-cols-2 md:grid-cols-2 md:gap-x-7 lg:grid-cols-3 xl:gap-x-10 2xl:grid-cols-5">
                     <CourseCard
                         url="?program=cse and ece"
                         name="CSE and ECE"
@@ -107,7 +109,10 @@ export default function Index({
                             >
                                 Credit
                             </th>
-                            <th scope="col" className="hidden sm:table-cell px-6 py-3">
+                            <th
+                                scope="col"
+                                className="hidden px-6 py-3 sm:table-cell"
+                            >
                                 Program
                             </th>
                             <th scope="col" className="hidden px-6 py-3">
@@ -134,7 +139,7 @@ export default function Index({
                                 <td className="hidden px-6 py-4 lg:table-cell">
                                     {course.credit}
                                 </td>
-                                <td className="px-6 py-4 hidden sm:table-cell">
+                                <td className="hidden px-6 py-4 sm:table-cell">
                                     {course.program.name}
                                 </td>
                                 <td className="hidden px-6 py-4">

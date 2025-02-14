@@ -1,3 +1,4 @@
+import ScrollIndicator from '@/Components/ScrollIndicator';
 import TableCaption from '@/Components/TableCaption';
 import TableHead from '@/Components/TableHead';
 import TableRow from '@/Components/TableRow';
@@ -19,6 +20,9 @@ export default function Index({ rooms, noOfTypeA, noOfTypeB }) {
     return (
         <AuthLayout>
             <Head title="All Rooms" />
+            <div className="sm:hidden">
+                <ScrollIndicator />
+            </div>
             <div className="mb-5 mt-10">
                 <h2 className="text-xl font-semibold hover:underline md:text-2xl">
                     <Link href="/rooms">

@@ -16,8 +16,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::with(['major', 'courses'])->get();
-        return Inertia::render('Student/Index', ['students' => $students, 'noOfStudent' => $students->count()]);
+        $students = Student::with(['major', 'courses'])->paginate(10);
+        return Inertia::render('Student/Index', ['students' => $students, 'noOfStudent' => Student::count()]);
     }
 
     public function exportExcel()

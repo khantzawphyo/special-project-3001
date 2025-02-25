@@ -4,13 +4,13 @@ import TableRow from '@/Components/TableRow';
 import TableWrapper from '@/Components/TableWrapper';
 import AuthLayout from '@/Layouts/AuthLayout';
 
+import ScrollIndicator from '@/Components/ScrollIndicator';
 import { Head, Link, router } from '@inertiajs/react';
 import { Pencil, Trash2 } from 'lucide-react';
 import CourseCard from './Partials/CourseCard';
 import CourseModal from './Partials/CourseModal';
 import CoursePagination from './Partials/CoursePagination';
 import CourseType from './Partials/CourseType';
-import ScrollIndicator from '@/Components/ScrollIndicator';
 
 export default function Index({
     courses,
@@ -170,9 +170,7 @@ export default function Index({
                         ))}
                     </tbody>
                 </table>
-                {courses.data.length >= 10 && (
-                    <CoursePagination courses={courses} />
-                )}
+                <CoursePagination courses={courses} />
             </TableWrapper>
         </AuthLayout>
     );

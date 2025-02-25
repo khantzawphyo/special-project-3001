@@ -29,6 +29,7 @@ export default function SiteHeader({ title }) {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
     /* 
     these two properties will mess up header component
     transition-[width,height] group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12
@@ -51,29 +52,42 @@ export default function SiteHeader({ title }) {
                 </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <div className="flex items-center gap-x-2 rounded-full border hover:cursor-pointer dark:border-soft-purple/50 md:pe-10">
+                        <div className="flex items-center gap-x-2 rounded-full border bg-white hover:cursor-pointer dark:border-soft-purple/50 md:pe-10">
                             <span className="sr-only">Open user menu</span>
                             <img
                                 className="h-14 w-14 rounded-full"
                                 src={facultyImg}
                                 alt="Dr. Myat Thuzar Tun"
                             />
-                            <div className="hidden flex-col items-start dark:text-white md:flex">
-                                <p>{user.name}</p>
-                                <span className="text-gray-400 dark:text-white">
+                            <div className="hidden flex-col items-start md:flex">
+                                <p className='text-black'>{user.name}</p>
+                                <span className="text-black/60">
                                     Pro-Rector
                                 </span>
                             </div>
                         </div>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="mr-5 mt-2 w-44 bg-white dark:bg-main-purple md:ml-8 md:mr-0">
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuLabel className="px-4 py-1">
+                            My Account
+                        </DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <Link href="/settings">Settings</Link>
+                        <DropdownMenuItem asChild>
+                            <Link
+                                className="px-4 py-2 hover:cursor-pointer dark:hover:bg-primary-purple/50"
+                                href="/settings"
+                            >
+                                Settings
+                            </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <a href="/logout">Logout</a>
+                        <DropdownMenuItem asChild>
+                            <Link
+                                method="post"
+                                className="w-full px-4 py-2 hover:cursor-pointer dark:hover:bg-primary-purple/50"
+                                href="/logout"
+                            >
+                                Logout
+                            </Link>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

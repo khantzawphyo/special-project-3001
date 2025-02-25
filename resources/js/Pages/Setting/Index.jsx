@@ -13,7 +13,7 @@ export default function Index() {
     return (
         <AuthLayout>
             <Head title="Settings" />
-            <div className="rounded-2xl mt-12 dark:bg-main-purple bg-white p-8 pt-10">
+            <div className="rounded-2xl mt-12 border-white border shadow-md dark:bg-main-purple bg-white p-8 pt-10">
                 <div className="flex items-center justify-between border-b-2 border-gray-200 pb-4">
                     <h3 className="text-2xl font-semibold">My Profile</h3>
                     <Link

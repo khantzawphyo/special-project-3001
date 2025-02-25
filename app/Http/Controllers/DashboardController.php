@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         $faculties = Faculty::paginate(6);
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Dashboard/Index', [
             'currentDate' => now()->format('F j, Y'),
             'faculties' => $faculties,
             'noOfFaculty' => Faculty::count(),

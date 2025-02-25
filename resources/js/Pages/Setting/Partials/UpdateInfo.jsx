@@ -1,3 +1,6 @@
+import { Button } from '@/shadcn/ui/button';
+import { Input } from '@/shadcn/ui/input';
+import { Label } from '@/shadcn/ui/label';
 import { usePage } from '@inertiajs/react';
 
 export default function UpdateInfo() {
@@ -8,13 +11,13 @@ export default function UpdateInfo() {
     return (
         <form action="" method="post" className="space-y-4">
             <div className="">
-                <label
+                <Label
                     htmlFor="name"
                     className="mb-2 block text-sm font-medium text-gray-900"
                 >
                     Your Name
-                </label>
-                <input
+                </Label>
+                <Input
                     type="text"
                     name="name"
                     id="name"
@@ -25,13 +28,13 @@ export default function UpdateInfo() {
                 />
             </div>
             <div className="">
-                <label
+                <Label
                     htmlFor="name"
                     className="mb-2 block text-sm font-medium text-gray-900"
                 >
                     Email Address
-                </label>
-                <input
+                </Label>
+                <Input
                     type="email"
                     name="name"
                     id="name"
@@ -42,12 +45,12 @@ export default function UpdateInfo() {
                 />
             </div>
             <div className="">
-                <button
+                <Button
                     type="submit"
                     className="w-full rounded-lg bg-[#3D2E58] px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none sm:w-auto"
                 >
                     Update
-                </button>
+                </Button>
             </div>
         </form>
     );

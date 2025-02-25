@@ -3,7 +3,6 @@ import {
     SidebarContent,
     SidebarHeader,
     SidebarMenuButton,
-    SidebarRail,
     useSidebar,
 } from '@/shadcn/ui/sidebar';
 import { Link } from '@inertiajs/react';
@@ -70,7 +69,7 @@ export function AppSidebar({ ...props }) {
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader
-                className={`overflow-hidden bg-[#282336] pt-6 ${open && 'px-6'}`}
+                className={`overflow-hidden bg-[#282336] pt-6 ${open && 'px-6'} `}
             >
                 {open ? (
                     <Link href="/" className="rounded-2xl bg-white py-1">
@@ -90,7 +89,7 @@ export function AppSidebar({ ...props }) {
                     </Link>
                 )}
             </SidebarHeader>
-            <SidebarContent className="overflow-hidden bg-[#282336]">
+            <SidebarContent className="sidebar bg-main-purple">
                 <ul className="space-y-1 px-4 py-8 pt-10 text-center text-white">
                     <li className="mb-14">
                         <Link
@@ -112,9 +111,6 @@ export function AppSidebar({ ...props }) {
                     ))}
                 </ul>
             </SidebarContent>
-            {/* <SidebarFooter>
-            </SidebarFooter> */}
-            <SidebarRail />
         </Sidebar>
     );
 }

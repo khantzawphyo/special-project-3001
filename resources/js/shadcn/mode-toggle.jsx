@@ -16,12 +16,12 @@ export default function ModeToggle({ className }) {
         <>
             {mounted && (
                 <div
-                    className={`hidden space-x-2 rounded-full border border-gray-300 px-2 sm:flex ${className}`}
+                    className={`hidden space-x-2 dark:text-white rounded-full border border-gray-300 px-2 sm:flex ${className}`}
                 >
                     <Button
                         variant="ghost"
                         size="icon"
-                        className={`rounded-full ${
+                        className={`rounded-full hover:bg-slate-400 ${
                             theme == 'light' ? 'bg-slate-400' : ''
                         }`}
                         onClick={() => setTheme('light')}
@@ -32,7 +32,7 @@ export default function ModeToggle({ className }) {
                     <Button
                         variant="ghost"
                         size="icon"
-                        className={`rounded-full ${
+                        className={`rounded-full hover:bg-slate-400 ${
                             theme == 'system' ? 'bg-slate-400' : ''
                         }`}
                         onClick={() => setTheme('system')}
@@ -43,7 +43,7 @@ export default function ModeToggle({ className }) {
                     <Button
                         variant="ghost"
                         size="icon"
-                        className={`rounded-full ${
+                        className={`rounded-full hover:bg-slate-400 ${
                             theme == 'dark' ? 'bg-slate-400 text-black' : ''
                         }`}
                         onClick={() => setTheme('dark')}

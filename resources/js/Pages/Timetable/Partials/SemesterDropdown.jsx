@@ -1,58 +1,47 @@
+import { Button } from '@/shadcn/ui/button';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/shadcn/ui/dropdown-menu';
 import { Link } from '@inertiajs/react';
 
-export default function SemesterDropdown({
-    setIsDropdownOpen,
-    isDropdownOpen,
-    selectedSemesterName,
-    semesters,
-    dropdownRef,
-}) {
+export default function SemesterDropdown({ selectedSemesterName, semesters }) {
     return (
-        <div className="relative w-56" ref={dropdownRef}>
-            <button
-                className="bg-primary-purple inline-flex w-full items-center justify-between rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white"
-                type="button"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-                {selectedSemesterName}
-                <svg
-                    className="ms-3 h-2.5 w-2.5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
-                >
-                    <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="m1 1 4 4 4-4"
-                    />
-                </svg>
-            </button>
-
-            {/* Semesters Dropdown Menu */}
-            {isDropdownOpen && (
-                <div className="absolute right-0 z-40 mt-2 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                    <ul
-                        className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownDefaultButton"
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button className="flex items-center justify-between max-w-max">
+                    {selectedSemesterName}
+                    <svg
+                        className="ms-3 h-2.5 w-2.5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 10 6"
                     >
-                        {semesters.map((semester) => (
-                            <li key={semester.id}>
-                                <Link
-                                    href={`?semester_id=${semester.id}`}
-                                    className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    onClick={() => setIsDropdownOpen(false)}
-                                >
-                                    {semester.name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </div>
+                        <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="m1 1 4 4 4-4"
+                        />
+                    </svg>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-44 bg-white dark:bg-main-purple dark:text-white sm:mr-8">
+                {semesters.map((semester) => (
+                    <DropdownMenuItem key={semester.id} asChild>
+                        <Link
+                            href={`?semester_id=${semester.id}`}
+                            className="px-4 py-2 text-sm hover:cursor-pointer hover:bg-platinum dark:hover:bg-primary-purple/50"
+                        >
+                            {semester.name}
+                        </Link>
+                    </DropdownMenuItem>
+                ))}
+            </DropdownMenuContent>
+        </DropdownMenu>
     );
 }

@@ -1,4 +1,5 @@
-import RoomCard from "@/Pages/Room/Partials/RoomCard";
+import RoomCard from '@/Pages/Room/Partials/RoomCard';
+import { Link } from '@inertiajs/react';
 
 export default function ExamTimetable() {
     return (

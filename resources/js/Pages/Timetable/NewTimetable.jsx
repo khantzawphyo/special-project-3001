@@ -1,14 +1,13 @@
+import ScrollIndicator from '@/Components/ScrollIndicator';
 import AuthLayout from '@/Layouts/AuthLayout';
-import { Head } from '@inertiajs/react';
-import { useEffect, useRef, useState } from 'react';
+import { Head, Link } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 import ExamSchedule from './Partials/ExamSchedule';
 import SemesterDropdown from './Partials/SemesterDropdown';
 
 export default function NewTimetable({ semesters, courses, examPeriods }) {
     const urlParams = new URLSearchParams(window.location.search);
     const semesterIdFromUrl = urlParams.get('semester_id') || 0;
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
 
     const [selectedSemesterName, setSelectedSemesterName] =
         useState('Select a Semester');
@@ -24,38 +23,20 @@ export default function NewTimetable({ semesters, courses, examPeriods }) {
         }
     }, [semesterIdFromUrl]);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)
-            ) {
-                setIsDropdownOpen(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
     return (
         <AuthLayout>
             <Head title="Create Exam Schedule" />
-            <div className="rounded-xl mt-12 border bg-white px-5 py-5 shadow-md">
-                <div className="flex items-center justify-between">
-                    <p className="text-xl font-bold">Create Exam Schedule</p>
+            {/* {semesterIdFromUrl != 0 && <ScrollIndicator />} */}
+            <div className="mt-12 rounded-xl border border-white bg-white px-5 py-5 shadow-md dark:bg-main-purple">
+                <div className="flex flex-col justify-between gap-y-4 sm:flex-row sm:items-center">
+                    <p className="text-xl font-bold hover:underline">
+                        <Link href="/new-timetable">Create Exam Schedule</Link>
+                    </p>
                     <SemesterDropdown
-                        dropdownRef={dropdownRef}
                         semesters={semesters}
-                        semesterIdFromUrl={semesterIdFromUrl}
                         selectedSemesterName={selectedSemesterName}
-                        setIsDropdownOpen={setIsDropdownOpen}
-                        isDropdownOpen={isDropdownOpen}
                     />
                 </div>
-
                 {courses.length > 0 && (
                     <ExamSchedule
                         semesterIdFromUrl={semesterIdFromUrl}

@@ -1,7 +1,34 @@
-import OverviewCard from "@/Components/OverviewCard";
-import { Link } from "@inertiajs/react";
+import OverviewCard from '@/Components/OverviewCard';
+import OverviewFaculty from '@/Components/OverviewFaculty';
+import { Link } from '@inertiajs/react';
 
-export default function Overview() {
+export default function Overview({
+    faculties,
+    noOfFaculty,
+    noOfStudent,
+    noOfCourse,
+}) {
+    const OverviewItems = [
+        {
+            title: 'Faculties',
+            count: noOfFaculty,
+            path: route('faculties.index'),
+            icon: '/assets/dashboard/overview-faculty.svg',
+        },
+        {
+            title: 'Students',
+            count: noOfStudent,
+            path: route('students.index'),
+            icon: '/assets/dashboard/overview-student.svg',
+        },
+        {
+            title: 'Courses',
+            count: noOfCourse,
+            path: route('courses.index'),
+            icon: '/assets/dashboard/overview-course.svg',
+        },
+    ];
+
     return (
         <div className="mb-4 grid grid-cols-1 gap-x-16 rounded-3xl xl:grid-cols-12">
             <div className="mb-12 rounded-3xl lg:col-span-8 xl:mb-0">
